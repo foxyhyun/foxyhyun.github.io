@@ -23,6 +23,8 @@ paper: "https://arxiv.org/abs/1806.02311"
 <p>그 결과, <b>더 자연스럽고 의미(구조) 보존이 잘 되는</b> 번역 이미지를 얻을 수 있다.</p>
 <p>이제부터 본 논문의 아이디어와 방법을 <b>조금 더 자세히</b> 살펴보자.</p>
 
+<blockquote><b>Background</b></blockquote>
+
 <figure>
   <img src="/assets/paper_img/attention_gan/fig2.png" alt="Background figure" style="max-width:100%; border-radius:12px;">
 </figure>
