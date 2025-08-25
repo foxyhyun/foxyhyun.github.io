@@ -159,3 +159,20 @@ th{background:#0b1220}
 /* 슬레이트/깃헙 스타일의 헤딩 앵커(#) 숨김 */
 .markdown-body h1 .anchor,
 .markdown-body h2 .anchor { display:none !important; }
+
+/* --- force Paper Review title style --- */
+.page-card > h1,
+.page-card > h1 a,
+.page-card h1[id],
+.page-card h1[id] a{
+  color: var(--text) !important;
+  text-decoration: none !important;
+  border: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* 제목 크기/간격 통일(원하면 숫자 조절) */
+.page-card > h1{ font-size: 2rem !important; font-weight: 800 !important; margin: .2em 0 .4em !important; }
