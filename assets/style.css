@@ -1,0 +1,20 @@
+/* 레이아웃 */
+:root { --accent: #4f46e5; --text: #222; --muted:#666; --border:#e5e7eb; }
+* { box-sizing: border-box; }
+body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans KR', Arial, sans-serif; color:var(--text); }
+.container { max-width: 860px; margin: 0 auto; padding: 24px 16px; }
+.site-header, .site-footer { padding: 14px 16px; border-bottom:1px solid var(--border); }
+.site-footer { border-top:1px solid var(--border); border-bottom:none; color:var(--muted); text-align:center; }
+.brand { font-weight:800; font-size: 20px; text-decoration:none; color:var(--text); }
+.nav a { margin-right: 14px; text-decoration:none; color: var(--accent); font-weight:600; }
+.nav a:hover { text-decoration: underline; }
+
+/* 버튼 */
+.tag-buttons { display:flex; flex-wrap:wrap; gap:10px; margin: 12px 0 20px; }
+.btn { display:inline-block; padding:8px 14px; border:1px solid var(--border); border-radius:9999px; text-decoration:none; color:var(--text); }
+.btn:hover { background:#f7f7f7; }
+
+/* 목록 */
+ul { padding-left: 18px; }
+li { margin: 6px 0; }
+span { color:var(--muted); font-size: 0.95em; }

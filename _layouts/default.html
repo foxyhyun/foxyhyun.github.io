@@ -1,31 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>{{ page.title }} | Foxy Scholar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="{{ "/assets/style.css" | relative_url }}">
   </head>
   <body>
-    <header>
-      <h1><a href="{{ "/" | relative_url }}">Foxy Scholar</a></h1>
-      <p>Foxyhyun의 논문 리뷰 & 연구 노트</p>
-      <nav>
-        <a href="{{ "/" | relative_url }}">Home</a> |
-        <a href="{{ "/blog/" | relative_url }}">Blog</a> |
-        <a href="{{ "/categories/" | relative_url }}">Categories</a> |
-        <a href="{{ "/tags/" | relative_url }}">Tags</a> |
-        <a href="{{ "/about/" | relative_url }}">About</a>
+    <header class="site-header">
+      <a class="brand" href="{{ "/" | relative_url }}">Foxy Scholar</a>
+      <nav class="nav">
+        <a href="{{ "/" | relative_url }}">Home</a>
+        <a href="{{ "/reviews/" | relative_url }}">Paper Review</a>
       </nav>
-      <hr>
     </header>
 
-    <main>
+    <main class="container">
       {{ content }}
     </main>
 
-    <footer>
-      <hr>
-      <p>© 2025 Foxy Scholar — Published with GitHub Pages</p>
+    <footer class="site-footer">
+      © 2025 Foxy Scholar
     </footer>
   </body>
 </html>
