@@ -4,25 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ page.title }} | Foxy Scholar</title>
-    <link rel="stylesheet" href="{{ "/assets/style.css" | relative_url }}">
+
+    <link rel="stylesheet"
+      href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet"
+      href="{{ '/assets/style.css?v=' | append: site.github.build_revision | relative_url }}">
+
   </head>
+
   <body>
     <header class="site-header">
       <div class="wrap">
-        <a class="brand" href="{{ "/" | relative_url }}">Foxy Scholar</a>
+        <a class="brand" href="{{ '/' | relative_url }}">Foxy Scholar</a>
         <nav class="nav">
-          <a href="{{ "/" | relative_url }}">Home</a>
-          <a href="{{ "/reviews/" | relative_url }}">Paper Review</a>
+          <a href="{{ '/' | relative_url }}"
+             class="{% if page.url == '/' %}active{% endif %}">Home</a>
+          <a href="{{ '/reviews/' | relative_url }}"
+             class="{% if page.url contains '/reviews/' %}active{% endif %}">Paper Review</a>
         </nav>
       </div>
     </header>
 
-    {% if page.url == "/" %}
+    {% if page.url == '/' %}
     <section class="hero">
       <div class="wrap">
         <h1>Foxy Scholar</h1>
         <p>논문 리뷰와 연구 노트를 정리하는 개인 블로그</p>
-        <a class="cta" href="{{ "/reviews/" | relative_url }}">리뷰 보러가기</a>
+        <a class="cta" href="{{ '/reviews/' | relative_url }}">리뷰 보러가기</a>
       </div>
     </section>
     {% endif %}
@@ -34,7 +42,7 @@
     </main>
 
     <footer class="site-footer">
-      <div class="wrap">© 2025 Foxy Scholar</div>
+      <div class="wrap">© {{ 'now' | date: '%Y' }} Foxy Scholar</div>
     </footer>
   </body>
 </html>
