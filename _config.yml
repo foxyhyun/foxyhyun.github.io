@@ -13,13 +13,14 @@ plugins:
   - jekyll-feed
 
 # 포스트 기본값 (모든 리뷰가 PaperReview 카테고리에 들어가도록)
+# _config.yml
 defaults:
   - scope:
-      path: ""
+      path: ""       # 모든 posts
       type: posts
     values:
-      layout: post
-      categories: ["PaperReview"]
+      layout: default          # ← post 말고 default 사용
+      categories: ["PaperReview"]   # 필요 시 유지
 
 # Jekyll이 기본적으로 무시하는 폴더 포함
 include:

@@ -145,3 +145,5 @@ th { background: #0b1220; }
 .pv-section { margin-top: 20px; }
 .pv-section h2 { border: none !important; margin: 8px 0 6px; font-weight: 800; }
 .paper-list:empty { display: none; }
+
+.hero h1, .hero p { color: var(--text) !important; }

@@ -31,3 +31,33 @@ paper: "https://arxiv.org/abs/1806.02311"
 핵심은 내용/구조는 유지하면서 스타일/도메인만 변경하는 것이다.</p>
 
 <p>문제는, <b>CycleGAN</b>처럼 전체 이미지를 다루면 배경, 조명, 텍스처까지 바뀌어 구조 보존이 어려울 수 있다는 것이다.</p>
+
+<figure>
+  <img src="/assets/paper_img/attention_gan/fig3.png" alt="CycleGAN limitation" style="max-width:100%; border-radius:12px;">
+</figure>
+
+<p>이전 모델(CycleGAN)의 한계는 전체를 바꾼다는 것.<br>
+즉, 우리가 원하는 관심 부분(ROI)만 변경하는 것이 아닌, 불필요한 <b>background</b>도 함께 변환하는 것이다.</p>
+
+<p>따라서 이 논문의 핵심 아이디어는 다음과 같다.</p>
+
+<p style="text-align:center;"><mark><b>“Translation Network가 어디를 바꿔야 하는지(foreground),<br>
+어디는 유지해야 하는지(background)를 스스로 Attention Map으로 학습하게 만들자”</b></mark></p>
+
+<figure>
+  <img src="/assets/paper_img/attention_gan/fig4.png" alt="Attention idea" style="max-width:100%; border-radius:12px;">
+</figure>
+
+<blockquote><b>Method - Overview</b></blockquote>
+
+<figure>
+  <img src="/assets/paper_img/attention_gan/fig5.png" alt="Method overview" style="max-width:100%; border-radius:12px;">
+</figure>
+
+<p>전체 구조는 다음과 같습니다. <b>CycleGAN</b>과 마찬가지로 양방향 생성기로, 
+\(F_{S \rightarrow T}, F_{T \leftarrow S}\) 로 구성된다. <br>
+<b>Attention Network</b>는 입력마다 \(A_S(s), A_T(t)\) 라는 <b>soft attention map</b>을 0~1 사이로 예측한다. <br>
+<b>Discriminator</b>는 \(D_T, D_S\) 로 구성되며, 주의 영역만 보도록 입력을 마스킹한다.</p>
+
+<p>이 때, 최종 <b>output</b>은 <b>foreground</b>와 <b>background</b>를 합친 값이다.</p>
+
