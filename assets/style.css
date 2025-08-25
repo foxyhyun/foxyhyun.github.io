@@ -135,3 +135,27 @@ th{background:#0b1220}
 
 /* ========== Sections spacing ========== */
 .pv-section{margin-top:20px}
+
+/* ---- Fix top titles: Paper Review / Foxy Scholar ---- */
+/* 색 강제, 밑줄/장식 제거, 앵커 아이콘 숨김 */
+.page-card h1, .page-card h1 a,
+.page-card h2, .page-card h2 a,
+.markdown-body h1, .markdown-body h1 a,
+.markdown-body h2, .markdown-body h2 a{
+  color: var(--text) !important;
+  text-decoration: none !important;
+  border: 0 !important;
+  border-bottom: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  padding-bottom: 0 !important;
+}
+
+/* 제목 크기/두께 통일(원하면 숫자 조절 가능) */
+.page-card h1, .markdown-body h1{ font-size: 2rem !important; font-weight: 800 !important; }
+.page-card h2, .markdown-body h2{ font-size: 1.6rem !important; font-weight: 800 !important; }
+
+/* 슬레이트/깃헙 스타일의 헤딩 앵커(#) 숨김 */
+.markdown-body h1 .anchor,
+.markdown-body h2 .anchor { display:none !important; }
