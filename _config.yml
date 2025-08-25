@@ -3,6 +3,8 @@ description: "Foxyhyun의 논문 리뷰 & 연구 노트"
 author: "Sihyun Lee"
 url: "https://foxyhyun.github.io"
 
+# 테마는 유지해도 되지만, 우리는 커스텀 레이아웃을 쓰므로
+# visual은 주로 /assets/style.css 로 제어됩니다.
 remote_theme: pages-themes/slate@v0.2.0
 
 plugins:
@@ -10,22 +12,16 @@ plugins:
   - jekyll-seo-tag
   - jekyll-feed
 
+# 포스트 기본값 (모든 리뷰가 PaperReview 카테고리에 들어가도록)
 defaults:
   - scope:
       path: ""
       type: posts
     values:
       layout: post
-      categories: ["review"]
+      categories: ["PaperReview"]
 
-navbar:
-  - name: Home
-    link: /
-  - name: About
-    link: /about/
-  - name: Categories
-    link: /categories/
-  - name: Tags
-    link: /tags/
-  - name: Blog
-    link: /blog/
+# Jekyll이 기본적으로 무시하는 폴더 포함
+include:
+  - _pages
+  - assets
