@@ -1,20 +1,82 @@
-/* 레이아웃 */
-:root { --accent: #4f46e5; --text: #222; --muted:#666; --border:#e5e7eb; }
-* { box-sizing: border-box; }
-body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans KR', Arial, sans-serif; color:var(--text); }
-.container { max-width: 860px; margin: 0 auto; padding: 24px 16px; }
-.site-header, .site-footer { padding: 14px 16px; border-bottom:1px solid var(--border); }
-.site-footer { border-top:1px solid var(--border); border-bottom:none; color:var(--muted); text-align:center; }
-.brand { font-weight:800; font-size: 20px; text-decoration:none; color:var(--text); }
-.nav a { margin-right: 14px; text-decoration:none; color: var(--accent); font-weight:600; }
-.nav a:hover { text-decoration: underline; }
+/* ====== Theme ====== */
+:root{
+  --bg:#0f172a;           /* 배경(다크 네이비) */
+  --panel:#111827;        /* 카드/패널 */
+  --border:#1f2937;
+  --text:#e5e7eb;         /* 기본 텍스트 */
+  --muted:#9ca3af;
+  --accent:#7c3aed;       /* 보라 포인트 */
+  --accent-2:#22d3ee;     /* 보조 포인트 */
+}
 
-/* 버튼 */
-.tag-buttons { display:flex; flex-wrap:wrap; gap:10px; margin: 12px 0 20px; }
-.btn { display:inline-block; padding:8px 14px; border:1px solid var(--border); border-radius:9999px; text-decoration:none; color:var(--text); }
-.btn:hover { background:#f7f7f7; }
+/* ====== Base ====== */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:
+    radial-gradient(1200px 600px at 100% -200px, rgba(34,211,238,.15), transparent 60%),
+    radial-gradient(900px 500px at -10% -150px, rgba(124,58,237,.22), transparent 60%),
+    var(--bg);
+  color:var(--text);
+  font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans KR', Arial, sans-serif;
+}
+a{color:var(--accent-2); text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
 
-/* 목록 */
-ul { padding-left: 18px; }
-li { margin: 6px 0; }
-span { color:var(--muted); font-size: 0.95em; }
+/* ====== Header / Nav ====== */
+.site-header{
+  border-bottom:1px solid var(--border);
+  background:rgba(15,23,42,.6);
+  backdrop-filter: blur(6px);
+  position: sticky; top:0; z-index: 50;
+}
+.brand{font-weight:800; font-size:20px; color:#fff; text-decoration:none}
+.nav{float:right}
+.nav a{margin-left:16px; color:#d1d5db; font-weight:600}
+.nav a:hover{color:#fff}
+
+/* ====== Hero (Home 전용) ====== */
+.hero{
+  background: linear-gradient(135deg, rgba(124,58,237,.35), rgba(34,211,238,.28));
+  padding:56px 0 48px;
+  border-bottom:1px solid var(--border);
+}
+.hero h1{margin:0 0 6px 0; font-size:40px; line-height:1.2}
+.hero p{margin:0 0 16px 0; color:var(--muted)}
+.cta{
+  display:inline-block; padding:10px 16px; border-radius:9999px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#001014; font-weight:800;
+}
+
+/* ====== Page Card ====== */
+.page-card{
+  background:var(--panel); border:1px solid var(--border);
+  border-radius:16px; padding:24px; margin:24px 0 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+/* ====== Headings reset (슬레이트의 다이아 제거) ====== */
+h2::before, h3::before{content:none !important}
+
+/* ====== Buttons row ====== */
+.tag-buttons{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 18px}
+.btn{
+  display:inline-block; padding:8px 14px; border-radius:9999px;
+  border:1px solid var(--border); color:#e5e7eb; background:#0b1220;
+}
+.btn:hover{background:#111b2e}
+
+/* ====== Paper list (카드형) ====== */
+.paper-list{list-style:none; padding:0; margin:10px 0 24px}
+.paper-list li{
+  background:#0b1220; border:1px solid var(--border);
+  border-radius:12px; padding:12px 14px; margin:8px 0;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.paper-list .post-link{color:#93c5fd; font-weight:700}
+.paper-list time{color:var(--muted); font-size:.9em}
+
+/* ====== Footer ====== */
+.site-footer{color:var(--muted); padding:24px 0; border-top:1px solid var(--border)}

@@ -2,25 +2,39 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>{{ page.title }} | Foxy Scholar</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ page.title }} | Foxy Scholar</title>
     <link rel="stylesheet" href="{{ "/assets/style.css" | relative_url }}">
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="{{ "/" | relative_url }}">Foxy Scholar</a>
-      <nav class="nav">
-        <a href="{{ "/" | relative_url }}">Home</a>
-        <a href="{{ "/reviews/" | relative_url }}">Paper Review</a>
-      </nav>
+      <div class="wrap">
+        <a class="brand" href="{{ "/" | relative_url }}">Foxy Scholar</a>
+        <nav class="nav">
+          <a href="{{ "/" | relative_url }}">Home</a>
+          <a href="{{ "/reviews/" | relative_url }}">Paper Review</a>
+        </nav>
+      </div>
     </header>
 
-    <main class="container">
-      {{ content }}
+    {% if page.url == "/" %}
+    <section class="hero">
+      <div class="wrap">
+        <h1>Foxy Scholar</h1>
+        <p>논문 리뷰와 연구 노트를 정리하는 개인 블로그</p>
+        <a class="cta" href="{{ "/reviews/" | relative_url }}">리뷰 보러가기</a>
+      </div>
+    </section>
+    {% endif %}
+
+    <main class="wrap">
+      <div class="page-card">
+        {{ content }}
+      </div>
     </main>
 
     <footer class="site-footer">
-      © 2025 Foxy Scholar
+      <div class="wrap">© 2025 Foxy Scholar</div>
     </footer>
   </body>
 </html>

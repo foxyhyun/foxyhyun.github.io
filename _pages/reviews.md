@@ -6,8 +6,7 @@ layout: default
 
 # 🧠 Paper Review
 
-아래 버튼을 눌러 분야별 리뷰 목록을 볼 수 있어요.  
-(글에 붙이는 **태그**는 정확히: `BasicAI`, `Medical`, `AIxMedical`, `ImageEnhancement`, `ComputerVision`, `AnomalyDetection`)
+원하는 분야를 선택하세요.
 
 <div class="tag-buttons">
   <a href="#basicai" class="btn">BasicAI</a>
@@ -18,58 +17,62 @@ layout: default
   <a href="#anomalydetection" class="btn">Anomaly Detection</a>
 </div>
 
----
-
-## 🔹 BasicAI {#basicai}
-<ul>
+## BasicAI {#basicai}
+<ul class="paper-list">
 {% for post in site.posts %}
   {% if post.categories contains "PaperReview" and post.tags contains "BasicAI" %}
-    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a> <span>({{ post.date | date: "%Y-%m-%d" }})</span></li>
+    <li><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <time>{{ post.date | date: "%Y-%m-%d" }}</time></li>
   {% endif %}
 {% endfor %}
 </ul>
 
-## 🔹 Medical {#medical}
-<ul>
+## Medical {#medical}
+<ul class="paper-list">
 {% for post in site.posts %}
   {% if post.categories contains "PaperReview" and post.tags contains "Medical" %}
-    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a> <span>({{ post.date | date: "%Y-%m-%d" }})</span></li>
+    <li><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <time>{{ post.date | date: "%Y-%m-%d" }}</time></li>
   {% endif %}
 {% endfor %}
 </ul>
 
-## 🔹 AI × Medical {#aixmedical}
-<ul>
+## AI × Medical {#aixmedical}
+<ul class="paper-list">
 {% for post in site.posts %}
   {% if post.categories contains "PaperReview" and post.tags contains "AIxMedical" %}
-    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a> <span>({{ post.date | date: "%Y-%m-%d" }})</span></li>
+    <li><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <time>{{ post.date | date: "%Y-%m-%d" }}</time></li>
   {% endif %}
 {% endfor %}
 </ul>
 
-## 🔹 Image Enhancement {#imageenhancement}
-<ul>
+## Image Enhancement {#imageenhancement}
+<ul class="paper-list">
 {% for post in site.posts %}
   {% if post.categories contains "PaperReview" and post.tags contains "ImageEnhancement" %}
-    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a> <span>({{ post.date | date: "%Y-%m-%d" }})</span></li>
+    <li><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <time>{{ post.date | date: "%Y-%m-%d" }}</time></li>
   {% endif %}
 {% endfor %}
 </ul>
 
-## 🔹 Computer Vision {#computervision}
-<ul>
+## Computer Vision {#computervision}
+<ul class="paper-list">
 {% for post in site.posts %}
   {% if post.categories contains "PaperReview" and post.tags contains "ComputerVision" %}
-    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a> <span>({{ post.date | date: "%Y-%m-%d" }})</span></li>
+    <li><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <time>{{ post.date | date: "%Y-%m-%d" }}</time></li>
   {% endif %}
 {% endfor %}
 </ul>
 
-## 🔹 Anomaly Detection {#anomalydetection}
-<ul>
+## Anomaly Detection {#anomalydetection}
+<ul class="paper-list">
 {% for post in site.posts %}
   {% if post.categories contains "PaperReview" and post.tags contains "AnomalyDetection" %}
-    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a> <span>({{ post.date | date: "%Y-%m-%d" }})</span></li>
+    <li><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <time>{{ post.date | date: "%Y-%m-%d" }}</time></li>
   {% endif %}
 {% endfor %}
 </ul>
