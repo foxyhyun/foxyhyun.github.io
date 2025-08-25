@@ -1,7 +1,7 @@
 ---
 title: "[Review] Unsupervised Attention-guided Image-to-Image Translation (NeurIPS 2018)"
 categories: [PaperReview]
-tags: [Computer Vision]
+tags: [ComputerVision]
 year: "2018"
 venue: "NeurIPS 2018"
 paper: "https://arxiv.org/abs/1806.02311"

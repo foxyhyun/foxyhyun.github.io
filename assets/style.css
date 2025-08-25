@@ -85,3 +85,6 @@ figure { margin: 20px 0; text-align: center; }
 figure img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
 figure figcaption { font-size: 0.9em; color: var(--muted); margin-top: 6px; }
 mark { background: #fde047; padding: 0 4px; border-radius: 3px; }
+
+.btn.active{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#001014; font-weight:800}
+.pv-section{margin-top:16px}
