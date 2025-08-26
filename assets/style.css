@@ -197,3 +197,9 @@ img.zoomable.zoomed{
   border-radius:12px;
 }
 .no-scroll{overflow:hidden}
+
+/* About 링크 리스트 */
+.link-list{ list-style:none; padding:0; margin:8px 0 0; }
+.link-list li{ margin:6px 0; }
+.link-list a{ color:#93c5fd; font-weight:700; }
+.link-list a:hover{ filter:brightness(1.15); text-decoration:none; }
