@@ -57,9 +57,9 @@ paper: "https://arxiv.org/abs/1806.02311"
 </figure>
 
 <p>전체 구조는 다음과 같습니다. <b>CycleGAN</b>과 마찬가지로 양방향 생성기로, 
-\(F_{S \rightarrow T}, F_{T \leftarrow S}\) 로 구성된다. <br>
-<b>Attention Network</b>는 입력마다 \(A_S(s), A_T(t)\) 라는 <b>soft attention map</b>을 0~1 사이로 예측한다. <br>
-<b>Discriminator</b>는 \(D_T, D_S\) 로 구성되며, 주의 영역만 보도록 입력을 마스킹한다.</p>
+$ \(F_{S \rightarrow T}, F_{T \leftarrow S}\) $ 로 구성된다. <br>
+<b>Attention Network</b>는 입력마다 $ \(A_S(s), A_T(t)\) $ 라는 <b>soft attention map</b>을 0~1 사이로 예측한다. <br>
+<b>Discriminator</b>는 $ \(D_T, D_S\) $ 로 구성되며, 주의 영역만 보도록 입력을 마스킹한다.</p>
 
 <p>이 때, 최종 <b>output</b>은 <b>foreground</b>와 <b>background</b>를 합친 값이다.</p>
 
@@ -69,9 +69,9 @@ paper: "https://arxiv.org/abs/1806.02311"
   <img src="/assets/paper_img/attention_gan/fig6.png" alt="Attention-guided Generator" style="max-width:100%; border-radius:12px;">
 </figure>
 
-<p><b>Generator</b>는 \(A_S(s)\) 라는 0과 1 사이 값으로 구성된 가중치 맵을 배운다. 
+<p><b>Generator</b>는 $ \(A_S(s)\) $ 라는 0과 1 사이 값으로 구성된 가중치 맵을 배운다. 
 이 가중치 맵을 보고 변환할지, 그대로 둘지 결정한다. <br>
-예를 들어, \(A_S = 1\) 이면 변환을 채택, \(A_S = 0\) 이면 원본을 유지한다.</p>
+예를 들어,$ \(A_S = 1\) $ 이면 변환을 채택, $ \(A_S = 0\) $ 이면 원본을 유지한다.</p>
 
 <p><b>Loss Function</b>은 <b>Adversarial Loss</b>와 <b>Cycle Consistency Loss</b>로 구성된다. 
 <mark><b>Adversarial Loss</b>는 진짜/가짜를 구별하고, <b>Cycle Consistency Loss</b>는 원본과 생성된 이미지의 차이를 줄인다.</mark><br>
