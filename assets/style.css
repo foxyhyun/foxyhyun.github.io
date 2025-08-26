@@ -228,10 +228,11 @@ hr{ border:0; height:1px; background: var(--border); opacity:.7; }
 .kicker{
   display:inline-block;
   font-weight:800;
-  color:#a5b4fc;          /* ↔ 여기 원하는 색으로 변경 */
-  margin: 6px 0 8px;
+  color:#a5b4fc;  /* <- 여기 색만 원하는 값으로 변경 (#60a5fa 등) */
+  margin:6px 0 8px;
   letter-spacing:.3px;
 }
+
 
 /* ===== 카드/버튼 마감 ===== */
 .home-card{

@@ -16,7 +16,7 @@ title: "Home"
 
 <span class="kicker">Latest</span>
 <ul class="paper-list">
-{% assign recent = site.posts | where_exp:'p','p.categories contains "PaperReview"' | slice: 0, 5 %}
+{% assign recent = site.categories.PaperReview | slice: 0, 5 %}
 {% for post in recent %}
   <li>
     <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
