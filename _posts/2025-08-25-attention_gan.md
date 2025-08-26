@@ -75,7 +75,7 @@ paper: "https://arxiv.org/abs/1806.02311"
 
 <p><b>Loss Function</b>은 <b>Adversarial Loss</b>와 <b>Cycle Consistency Loss</b>로 구성된다. 
 <mark>Adversarial Loss는 진짜/가짜를 구별하고, Cycle Consistency Loss는 원본과 생성된 이미지의 차이를 줄인다.</mark><br>
-Cycle Consistency의 가중치(람다)가 커지면 내용 보존이 강해지고, 작아지면 내용 변화가 커질 위험이 있다. (논문에서는 \lambda =10 사용)</p>
+Cycle Consistency의 가중치(람다)가 커지면 내용 보존이 강해지고, 작아지면 내용 변화가 커질 위험이 있다. (논문에서는 $ \lambda =10 사용)</p>
 
 <p><b>Adversarial Loss</b>에서 <i>real target</i> 이미지는 1로, 생성 이미지는 0으로 판별하도록 학습한다.<br>
 <b>Cycle Consistency Loss</b>는 L1로 원본과 생성물의 차이를 줄여 더 진짜 같은 이미지를 만들도록 유도한다.</p>
