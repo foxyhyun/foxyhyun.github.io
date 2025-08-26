@@ -57,7 +57,7 @@ paper: "https://arxiv.org/abs/1806.02311"
 </figure>
 
 <p>전체 구조는 다음과 같습니다. <b>CycleGAN</b>과 마찬가지로 양방향 생성기로, 
- \(F_{S \rightarrow T}, F_{T \leftarrow S}\)  로 구성된다. <br>
+ \(F_{S \rightarrow T}, F_{T \rightarrow S}\)  로 구성된다. <br>
 <b>Attention Network</b>는 입력마다  \(A_S(s), A_T(t)\)  라는 <b>soft attention map</b>을 0~1 사이로 예측한다. <br>
 <b>Discriminator</b>는  \(D_T, D_S\)  로 구성되며, 주의 영역만 보도록 입력을 마스킹한다.</p>
 

@@ -101,7 +101,9 @@ a:hover{text-decoration:underline}
   background:#0b1220;border:1px solid var(--border);
   border-radius:12px;padding:14px 16px;margin:10px 0;
   display:flex;justify-content:space-between;align-items:center;gap:12px;
+  transition: background .15s ease, border-color .15s ease;
 }
+.paper-list li:hover{ border-color:#334155; background:#0e1726; }
 .paper-list .post-link{color:#93c5fd;font-weight:700}
 .paper-list time{color:var(--muted);font-size:.9em}
 .paper-list:empty{display:none}
@@ -114,17 +116,18 @@ mark{background:#fde047;padding:0 4px;border-radius:3px;color:#111}
 
 blockquote{
   border-left:4px solid var(--accent-2);padding:.6em 1em;margin:1.2em 0;
-  background:rgba(34,211,238,.08);font-style:italic;color:#dbeafe;
+  background:rgba(34,211,238,.08);font-style:italic;color:#dbeafe;border-radius:10px;
 }
 
 code{background:#0b1220;border:1px solid var(--border);border-radius:6px;padding:0 .35em}
 pre{
   background:#0b1220;border:1px solid var(--border);border-radius:12px;
-  padding:14px 16px;overflow:auto;margin:14px 0;
+  padding:14px 16px;overflow:auto;margin:14px 0;position:relative;
 }
 pre code{background:none;border:none;padding:0}
 
-table{width:100%;border-collapse:collapse;margin:16px 0}
+/* 표 라운딩 */
+table{width:100%;border-collapse:collapse;margin:16px 0;border-radius:10px;overflow:hidden}
 th,td{border:1px solid var(--border);padding:8px 10px}
 th{background:#0b1220}
 
@@ -137,7 +140,6 @@ th{background:#0b1220}
 .pv-section{margin-top:20px}
 
 /* ---- Fix top titles: Paper Review / Foxy Scholar ---- */
-/* 색 강제, 밑줄/장식 제거, 앵커 아이콘 숨김 */
 .page-card h1, .page-card h1 a,
 .page-card h2, .page-card h2 a,
 .markdown-body h1, .markdown-body h1 a,
@@ -145,37 +147,47 @@ th{background:#0b1220}
   color: var(--text) !important;
   text-decoration: none !important;
   border: 0 !important;
-  border-bottom: 0 !important;
   background: transparent !important;
   background-image: none !important;
   box-shadow: none !important;
   padding-bottom: 0 !important;
 }
-
-/* 제목 크기/두께 통일(원하면 숫자 조절 가능) */
 .page-card h1, .markdown-body h1{ font-size: 2rem !important; font-weight: 800 !important; }
 .page-card h2, .markdown-body h2{ font-size: 1.6rem !important; font-weight: 800 !important; }
-
-/* 슬레이트/깃헙 스타일의 헤딩 앵커(#) 숨김 */
-.markdown-body h1 .anchor,
-.markdown-body h2 .anchor { display:none !important; }
-
-/* --- force Paper Review title style --- */
-.page-card > h1,
-.page-card > h1 a,
-.page-card h1[id],
-.page-card h1[id] a{
-  color: var(--text) !important;
-  text-decoration: none !important;
-  border: 0 !important;
-  background: transparent !important;
-  background-image: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-}
-
-/* 제목 크기/간격 통일(원하면 숫자 조절) */
-.page-card > h1{ font-size: 2rem !important; font-weight: 800 !important; margin: .2em 0 .4em !important; }
+.markdown-body h1 .anchor, .markdown-body h2 .anchor { display:none !important; }
 
 /* MathJax color in dark theme */
 .mjx-container { color: var(--text) !important; }
+
+/* ========== UX Enhancers (포스트 가독/기능) ========== */
+/* 포스트 페이지 가독성 */
+.is-post .wrap{ max-width: 820px; }
+.is-post .page-card{ padding: 32px 28px; }
+.is-post p{ line-height: 1.8; font-size: 1.05rem; }
+
+/* 스크롤 진행막대 */
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:100%;
+  transform-origin:0 0;transform:scaleX(0);
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  z-index:9999;pointer-events:none;
+}
+
+/* 코드 복사 버튼 */
+.copy-btn{
+  position:absolute;top:8px;right:8px;
+  background:#0b1220;color:#d1d5db;border:1px solid var(--border);
+  border-radius:8px;padding:4px 8px;font-size:12px;cursor:pointer;
+}
+.copy-btn:hover{background:#1e293b}
+
+/* 이미지 줌 (클릭 토글) */
+img.zoomable{cursor:zoom-in;transition:transform .2s ease,box-shadow .2s ease}
+img.zoomable.zoomed{
+  position:fixed;top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(1.05);
+  max-width:calc(100vw - 100px);max-height:calc(100vh - 100px);
+  z-index:10000;cursor:zoom-out;box-shadow:0 30px 80px rgba(0,0,0,.6);
+  border-radius:12px;
+}
+.no-scroll{overflow:hidden}
