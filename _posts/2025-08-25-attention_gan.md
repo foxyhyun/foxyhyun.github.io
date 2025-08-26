@@ -43,8 +43,8 @@ paper: "https://arxiv.org/abs/1806.02311"
 
 <p>따라서 이 논문의 핵심 아이디어는 다음과 같다.</p>
 
-<p style="text-align:center;"><mark><b>“Translation Network가 어디를 바꿔야 하는지(foreground),<br>
-어디는 유지해야 하는지(background)를 스스로 Attention Map으로 학습하게 만들자”</b></mark></p>
+<p style="text-align:center;"><mark>“Translation Network가 어디를 바꿔야 하는지(foreground),<br>
+어디는 유지해야 하는지(background)를 스스로 Attention Map으로 학습하게 만들자”</mark></p>
 
 <figure>
   <img src="/assets/paper_img/attention_gan/fig4.png" alt="Attention idea" style="max-width:100%; border-radius:12px;">
@@ -74,8 +74,8 @@ paper: "https://arxiv.org/abs/1806.02311"
 예를 들어, \(A_S = 1\)  이면 변환을 채택,  \(A_S = 0\)  이면 원본을 유지한다.</p>
 
 <p><b>Loss Function</b>은 <b>Adversarial Loss</b>와 <b>Cycle Consistency Loss</b>로 구성된다. 
-<mark><b>Adversarial Loss</b>는 진짜/가짜를 구별하고, <b>Cycle Consistency Loss</b>는 원본과 생성된 이미지의 차이를 줄인다.</mark><br>
-Cycle Consistency의 가중치(람다)가 커지면 내용 보존이 강해지고, 작아지면 내용 변화가 커질 위험이 있다. (논문에서는 \lamda =10 사용)</p>
+<mark>Adversarial Loss는 진짜/가짜를 구별하고, Cycle Consistency Loss는 원본과 생성된 이미지의 차이를 줄인다.</mark><br>
+Cycle Consistency의 가중치(람다)가 커지면 내용 보존이 강해지고, 작아지면 내용 변화가 커질 위험이 있다. (논문에서는 \lambda =10 사용)</p>
 
 <p><b>Adversarial Loss</b>에서 <i>real target</i> 이미지는 1로, 생성 이미지는 0으로 판별하도록 학습한다.<br>
 <b>Cycle Consistency Loss</b>는 L1로 원본과 생성물의 차이를 줄여 더 진짜 같은 이미지를 만들도록 유도한다.</p>
