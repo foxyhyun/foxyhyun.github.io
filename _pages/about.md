@@ -1,7 +1,7 @@
 ---
 title: "About Me"
 permalink: /about/
-layout: default
+layout: post
 ---
 
 # 🦊 About Me

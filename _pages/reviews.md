@@ -1,7 +1,8 @@
 ---
 title: Paper Review
 permalink: /reviews/
-layout: default
+layout: post
+
 ---
 
 # 🧠 Paper Review
@@ -10,7 +11,6 @@ layout: default
   <a href="#all" class="btn" data-target="all">All</a>
   <a href="#basicai" class="btn" data-target="basicai">BasicAI</a>
   <a href="#medical" class="btn" data-target="medical">Medical</a>
-  <a href="#aixmedical" class="btn" data-target="aixmedical">AI × Medical</a>
   <a href="#imageenhancement" class="btn" data-target="imageenhancement">Image Enhancement</a>
   <a href="#computervision" class="btn" data-target="computervision">Computer Vision</a>
   <a href="#anomalydetection" class="btn" data-target="anomalydetection">Anomaly Detection</a>
@@ -33,18 +33,6 @@ layout: default
   <ul class="paper-list">
   {% for post in site.posts %}
     {% if post.categories contains "PaperReview" and post.tags contains "Medical" %}
-      <li><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        <time>{{ post.date | date: "%Y-%m-%d" }}</time></li>
-    {% endif %}
-  {% endfor %}
-  </ul>
-</section>
-
-<section class="pv-section" data-key="aixmedical">
-  <h2>AI × Medical</h2>
-  <ul class="paper-list">
-  {% for post in site.posts %}
-    {% if post.categories contains "PaperReview" and post.tags contains "AIxMedical" %}
       <li><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
         <time>{{ post.date | date: "%Y-%m-%d" }}</time></li>
     {% endif %}

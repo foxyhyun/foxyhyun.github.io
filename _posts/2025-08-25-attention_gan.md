@@ -4,6 +4,7 @@ categories: [PaperReview]
 tags: [ComputerVision]
 year: "2018"
 venue: "NeurIPS 2018"
+layout: post
 paper: "https://arxiv.org/abs/1806.02311"
 ---
 

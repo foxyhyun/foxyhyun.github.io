@@ -1,7 +1,8 @@
 ---
 title: Blog
 permalink: /blog/
-layout: default
+layout: post
+
 ---
 
 # 📚 All Posts

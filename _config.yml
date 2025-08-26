@@ -3,7 +3,7 @@ description: "Foxyhyun의 논문 리뷰 & 연구 노트"
 author: "Sihyun Lee"
 url: "https://foxyhyun.github.io"
 
-remote_theme: pages-themes/slate@v0.2.0
+remote_theme: pages-themes/slate@v0.2.0   # 유지 (방법 B)
 
 plugins:
   - jekyll-remote-theme
@@ -15,7 +15,7 @@ defaults:
       path: ""       
       type: posts
     values:
-      layout: post              # 기본 포스트 레이아웃(post.html) 사용
+      layout: post              # 기본 포스트는 post.html 적용
       categories: ["PaperReview"]
 
 include:

@@ -12,10 +12,10 @@
     <link rel="stylesheet"
           href="{{ '/assets/style.css?v=' | append: site.github.build_revision | relative_url }}">
 
-    <!-- (선택) SEO 메타태그 -->
+    <!-- SEO 태그 -->
     {% if site.plugins contains 'jekyll-seo-tag' %}{% seo %}{% endif %}
 
-    <!-- MathJax v3 (config 먼저, 스크립트 나중) -->
+    <!-- MathJax v3 -->
     <script>
       window.MathJax = {
         tex: {
@@ -33,26 +33,19 @@
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   </head>
 
-  <!-- 포스트 페이지면 is-post 클래스 부여(읽기폭/행간 등 스타일 분기용) -->
-  <body class="{% if page.collection == 'posts' %}is-post{% endif %}">
+  <body class="{% if page.layout == 'post' %}is-post{% endif %}">
     <header class="site-header">
       <div class="wrap">
         <a class="brand" href="{{ '/' | relative_url }}">Foxy Scholar</a>
         <nav class="nav">
-          <a href="{{ '/' | relative_url }}"
-             class="{% if page.url == '/' %}active{% endif %}">Home</a>
-          <a href="{{ '/reviews/' | relative_url }}"
-             class="{% if page.url contains '/reviews/' %}active{% endif %}">Paper Review</a>
-          <a href="{{ '/about/' | relative_url }}"
-             class="{% if page.url contains '/about/' %}active{% endif %}">About</a>
-
+          <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}active{% endif %}">Home</a>
+          <a href="{{ '/reviews/' | relative_url }}" class="{% if page.url contains '/reviews/' %}active{% endif %}">Paper Review</a>
+          <a href="{{ '/about/' | relative_url }}" class="{% if page.url contains '/about/' %}active{% endif %}">About</a>
         </nav>
       </div>
     </header>
 
-    <!-- 읽기 진행 막대 -->
-    <div id="progress"></div>
-
+    <!-- Hero 영역: 홈에서만 표시 -->
     {% if page.url == '/' %}
     <section class="hero">
       <div class="wrap">
@@ -66,69 +59,18 @@
     <main class="wrap">
       <div class="page-card">
         {{ content }}
-        {% if page.collection == 'posts' and page.comments != false %}
-          {% include comments.html %}
-        {% endif %}
       </div>
     </main>
-
 
     <footer class="site-footer">
       <div class="wrap">© {{ 'now' | date: '%Y' }} Foxy Scholar</div>
     </footer>
 
-    <!-- 수식 강제 렌더링(비동기 로드 대응) -->
+    <!-- 수식 강제 렌더링 -->
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
-        else if (window.MathJax && MathJax.typeset) MathJax.typeset();
       });
-    </script>
-
-    <!-- Reading progress / Code copy / Image zoom -->
-    <script>
-      // Reading progress bar
-      (function(){
-        const bar = document.getElementById('progress');
-        if (!bar) return;
-        const onScroll = () => {
-          const h = document.documentElement;
-          const sc = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
-          bar.style.transform = `scaleX(${Math.max(0, Math.min(1, sc))})`;
-        };
-        addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
-      })();
-
-      // Copy button for code blocks + image zoom
-      (function(){
-        // Copy buttons
-        document.querySelectorAll('pre > code').forEach(code => {
-          const pre = code.parentElement;
-          const btn = document.createElement('button');
-          btn.className = 'copy-btn';
-          btn.type = 'button';
-          btn.textContent = 'Copy';
-          btn.onclick = async () => {
-            try {
-              await navigator.clipboard.writeText(code.innerText);
-              btn.textContent = 'Copied!';
-              setTimeout(()=>btn.textContent='Copy', 1200);
-            } catch (e) { btn.textContent = 'Error'; }
-          };
-          pre.appendChild(btn);
-        });
-
-        // Image zoom
-        document.querySelectorAll('figure img, .markdown-body img')
-          .forEach(img => img.classList.add('zoomable'));
-        document.addEventListener('click', e => {
-          const img = e.target.closest('img.zoomable');
-          if (!img) return;
-          img.classList.toggle('zoomed');
-          document.body.classList.toggle('no-scroll', img.classList.contains('zoomed'));
-        });
-      })();
     </script>
   </body>
 </html>

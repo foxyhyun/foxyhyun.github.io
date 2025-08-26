@@ -83,7 +83,11 @@ strong, b {
 .pv-section h2{margin:8px 0 6px!important;font-weight:800;color:#cbd5e1}
 
 /* Slate가 포스트 본문에 주는 흰 배경 방지 */
-.markdown-body{background:transparent!important;color:var(--text)!important}
+.markdown-body {
+  background: transparent !important;
+  color: var(--text) !important;
+}
+
 .markdown-body a{color:var(--accent-2)!important}
 
 /* ========== Tag Buttons ========== */
