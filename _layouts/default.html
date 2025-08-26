@@ -65,5 +65,17 @@
     <footer class="site-footer">
       <div class="wrap">© {{ 'now' | date: '%Y' }} Foxy Scholar</div>
     </footer>
+
+    <script>
+    // DOM이 그려진 뒤 수식 강제 렌더링
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+      } else if (window.MathJax && MathJax.typeset) {
+        MathJax.typeset();
+      }
+    });
+  </script>
+
   </body>
 </html>
