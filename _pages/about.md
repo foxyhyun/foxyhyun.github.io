@@ -12,19 +12,17 @@ layout: default
 
 ---
 
-## 🔬 Research Focus
-- Biomedical Imaging: 현미경/의료영상 향상, Signal Analysis 기반 Downstream Task
-- Image Enhancement: GAN/Diffusion/Attention 기반 저노이즈·고해상도화
-- Computer Vision: Detection/Segmentation
-- Anomaly Detection: 의료 영상 이상 탐지 및 방사선 이상 예측
+<div class="section-title">Research Focus</div>
+<ul class="pretty">
+  <li>Biomedical Imaging: 현미경/의료영상 향상, Signal Analysis 기반 Downstream Task</li>
+  <li>Image Enhancement: GAN/Diffusion/Attention 기반 저노이즈·고해상도화</li>
+  <li>Computer Vision: Detection/Segmentation</li>
+  <li>Anomaly Detection: 의료 영상 이상 탐지 및 방사선 이상 예측</li>
+</ul>
 
-
----
-
-## 🌐 Links
-<div class="tag-buttons">
-  <a class="btn" href="{{ '/reviews/' | relative_url }}">🧠 Paper Review</a>
-  <a class="btn" href="https://github.com/foxyhyun" target="_blank" rel="noopener">GitHub</a>
-  <a class="btn" href="https://foxyprogramming.tistory.com/" target="_blank" rel="noopener">Tisotry</a>
-  <a class="btn" href="tlgus7668@gm.gist.ac.kr">Email</a>
-</div>
+<div class="section-title">Links</div>
+<ul class="link-list">
+  <li>🐙 <a href="https://github.com/foxyhyun" target="_blank" rel="noopener">GitHub</a></li>
+  <li>📝 <a href="https://foxyprogramming.tistory.com/" target="_blank" rel="noopener">Tistory</a></li>
+  <li>✉️ <a href="mailto:tlgus7668@gm.gist.ac.kr">tlgus7668@gm.gist.ac.kr</a></li>
+</ul>

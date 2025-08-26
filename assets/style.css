@@ -204,9 +204,71 @@ img.zoomable.zoomed{
 .link-list a{ color:#93c5fd; font-weight:700; }
 .link-list a:hover{ filter:brightness(1.15); text-decoration:none; }
 
-/* Cusdis widget dark theme touch-up */
-#comments h2{ color: var(--text); }
-#cusdis_thread a{ color:#93c5fd; }
-#cusdis_thread input, #cusdis_thread textarea{
-  background:#0b1220; border:1px solid var(--border); color:var(--text);
+/* ===== Section titles / 점선 제거 & 통일 ===== */
+.section-title{
+  display:flex; align-items:center; gap:10px;
+  margin: 8px 0 10px; font-weight:800; letter-spacing:.2px;
+  color: #cbd5e1;  /* 섹션 타이틀 색 */
+  font-size: 1.05rem;
 }
+.section-title::before{
+  content:""; width:18px; height:18px; border-radius:6px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 2px 10px rgba(0,0,0,.25);
+}
+
+/* 슬레이트가 그어주는 점선/밑줄 제거 */
+.page-card h2, .page-card h3,
+.markdown-body h2, .markdown-body h3{
+  border:0 !important; background:none !important; box-shadow:none !important;
+}
+hr{ border:0; height:1px; background: var(--border); opacity:.7; }
+
+/* ===== Home “Latest” 스타일 ===== */
+.kicker{
+  display:inline-block;
+  font-weight:800;
+  color:#a5b4fc;          /* ↔ 여기 원하는 색으로 변경 */
+  margin: 6px 0 8px;
+  letter-spacing:.3px;
+}
+
+/* ===== 카드/버튼 마감 ===== */
+.home-card{
+  background: rgba(17,24,39,.8);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.28);
+}
+.tag-buttons .btn{
+  background:#0e1726;
+  border-color:#243244;
+}
+.tag-buttons .btn:hover{
+  background:#142036;
+}
+
+/* ===== 리스트 가독성 보정 ===== */
+ul.pretty{ list-style:none; padding-left:0; }
+ul.pretty li{
+  position:relative; padding-left:18px; margin:6px 0;
+}
+ul.pretty li::before{
+  content:""; position:absolute; left:0; top:.62em;
+  width:8px; height:8px; border-radius:3px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow:0 0 0 2px rgba(124,58,237,.12);
+}
+
+/* About 링크 뱃지(버튼 대신 라인형) */
+.link-list{ list-style:none; padding:0; margin:8px 0 0; }
+.link-list li{ margin:8px 0; }
+.link-list a{
+  color:#93c5fd; font-weight:700; border-bottom:1px dashed #375a7f;
+}
+.link-list a:hover{ border-bottom-style:solid; filter:brightness(1.15); text-decoration:none; }
+
+/* 포스트 목록 hover 살짝 강조 */
+.paper-list li{ transition: background .15s ease, border-color .15s ease; }
+.paper-list li:hover{ background:#0e1726; border-color:#334155; }
