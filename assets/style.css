@@ -203,3 +203,10 @@ img.zoomable.zoomed{
 .link-list li{ margin:6px 0; }
 .link-list a{ color:#93c5fd; font-weight:700; }
 .link-list a:hover{ filter:brightness(1.15); text-decoration:none; }
+
+/* Cusdis widget dark theme touch-up */
+#comments h2{ color: var(--text); }
+#cusdis_thread a{ color:#93c5fd; }
+#cusdis_thread input, #cusdis_thread textarea{
+  background:#0b1220; border:1px solid var(--border); color:var(--text);
+}

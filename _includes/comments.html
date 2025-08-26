@@ -1,0 +1,23 @@
+{% if page.comments != false %}
+<div class="page-card" id="comments">
+  <h2 style="margin-top:0;">💬 Questions / Comments</h2>
+
+  <div id="cusdis_thread"
+       data-host="https://cusdis.com"
+       data-app-id="YOUR_CUSDIS_APP_ID"   <!-- ← 여기에 App ID 넣기 -->
+       data-page-id="{{ page.url }}"
+       data-page-url="{{ page.url | absolute_url }}"
+       data-page-title="{{ page.title }}"
+       data-lang="ko"
+       data-theme="dark">
+  </div>
+
+  <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+  <script>
+    // 다크테마 강제 (테마 전환 안 쓸 거면 유지)
+    document.addEventListener('DOMContentLoaded', () => {
+      try { window.CUSDIS && window.CUSDIS.setTheme && window.CUSDIS.setTheme('dark'); } catch(e){}
+    });
+  </script>
+</div>
+{% endif %}

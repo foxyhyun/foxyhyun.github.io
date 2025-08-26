@@ -20,7 +20,8 @@ defaults:
       type: posts
     values:
       layout: default          # ← post 말고 default 사용
-      categories: ["PaperReview"]   # 필요 시 유지
+      categories: ["PaperReview"]
+      comments: true   # 필요 시 유지
 
 # Jekyll이 기본적으로 무시하는 폴더 포함
 include:

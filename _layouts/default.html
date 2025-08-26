@@ -15,7 +15,7 @@
     <!-- (선택) SEO 메타태그 -->
     {% if site.plugins contains 'jekyll-seo-tag' %}{% seo %}{% endif %}
 
-    <!-- MathJax v3 (config 먼저, 스크립트 나중) -->
+    <!-- MathJax v3 -->
     <script>
       window.MathJax = {
         tex: {
@@ -33,7 +33,6 @@
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   </head>
 
-  <!-- 포스트 페이지면 is-post 클래스 부여(읽기폭/행간 등 스타일 분기용) -->
   <body class="{% if page.collection == 'posts' %}is-post{% endif %}">
     <header class="site-header">
       <div class="wrap">
@@ -45,7 +44,6 @@
              class="{% if page.url contains '/reviews/' %}active{% endif %}">Paper Review</a>
           <a href="{{ '/about/' | relative_url }}"
              class="{% if page.url contains '/about/' %}active{% endif %}">About</a>
-
         </nav>
       </div>
     </header>
@@ -67,13 +65,28 @@
       <div class="page-card">
         {{ content }}
       </div>
+
+      <!-- 댓글 영역: posts에서만 표시 -->
+      {% if page.collection == "posts" %}
+      <div class="page-card" id="comments">
+        <h2>💬 Comments</h2>
+        <div id="cusdis_thread"
+          data-host="https://cusdis.com"
+          data-app-id="d2d1c758-a7d2-4157-a026-58cf768c8def"
+          data-page-id="{{ page.url }}"
+          data-page-url="{{ page.url | absolute_url }}"
+          data-page-title="{{ page.title }}">
+        </div>
+        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+      </div>
+      {% endif %}
     </main>
 
     <footer class="site-footer">
       <div class="wrap">© {{ 'now' | date: '%Y' }} Foxy Scholar</div>
     </footer>
 
-    <!-- 수식 강제 렌더링(비동기 로드 대응) -->
+    <!-- 수식 강제 렌더링 -->
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
@@ -81,9 +94,8 @@
       });
     </script>
 
-    <!-- Reading progress / Code copy / Image zoom -->
+    <!-- Reading progress -->
     <script>
-      // Reading progress bar
       (function(){
         const bar = document.getElementById('progress');
         if (!bar) return;
@@ -94,36 +106,6 @@
         };
         addEventListener('scroll', onScroll, { passive: true });
         onScroll();
-      })();
-
-      // Copy button for code blocks + image zoom
-      (function(){
-        // Copy buttons
-        document.querySelectorAll('pre > code').forEach(code => {
-          const pre = code.parentElement;
-          const btn = document.createElement('button');
-          btn.className = 'copy-btn';
-          btn.type = 'button';
-          btn.textContent = 'Copy';
-          btn.onclick = async () => {
-            try {
-              await navigator.clipboard.writeText(code.innerText);
-              btn.textContent = 'Copied!';
-              setTimeout(()=>btn.textContent='Copy', 1200);
-            } catch (e) { btn.textContent = 'Error'; }
-          };
-          pre.appendChild(btn);
-        });
-
-        // Image zoom
-        document.querySelectorAll('figure img, .markdown-body img')
-          .forEach(img => img.classList.add('zoomable'));
-        document.addEventListener('click', e => {
-          const img = e.target.closest('img.zoomable');
-          if (!img) return;
-          img.classList.toggle('zoomed');
-          document.body.classList.toggle('no-scroll', img.classList.contains('zoomed'));
-        });
       })();
     </script>
   </body>
