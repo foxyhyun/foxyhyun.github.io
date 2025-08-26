@@ -31,6 +31,12 @@ a{color:var(--accent-2);text-decoration:none}
 a:hover{text-decoration:underline}
 .wrap{max-width:960px;margin:0 auto;padding:0 20px}
 
+/* ==== Bold text fix ==== */
+strong, b {
+  font-weight: 800 !important;   /* 진짜 굵게 */
+  color: var(--text) !important; /* 다크테마에서도 잘 보이게 */
+}
+
 /* ========== Header ========== */
 .site-header{
   border-bottom:1px solid var(--border);
