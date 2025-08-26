@@ -277,3 +277,16 @@ ul.pretty li::before{
 /* 포스트 목록 hover 살짝 강조 */
 .paper-list li{ transition: background .15s ease, border-color .15s ease; }
 .paper-list li:hover{ background:#0e1726; border-color:#334155; }
+
+/* Paper Review 필터 버튼 글자색 통일 */
+.tag-buttons .btn,
+.tag-buttons a.btn:link,
+.tag-buttons a.btn:visited{
+  color: var(--text) !important;
+}
+
+/* 활성 버튼도 밝은 글자 + 살짝 가독성 보정 */
+.tag-buttons .btn.active{
+  color: #ffffff !important;
+  text-shadow: 0 1px 0 rgba(0,0,0,.25);
+}

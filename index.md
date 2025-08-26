@@ -4,14 +4,11 @@ title: "Home"
 ---
 
 <div class="home-card">
-  ## 🦊 Foxy Scholar
+
   간단한 논문 리뷰와 연구 노트를 기록하는 공간입니다.  
+  
   주 관심사는 **Biomedical Imaging / Image Enhancement / Signal Analysis / Anomaly Detection** 입니다.
 
-  <div class="tag-buttons">
-    <a class="btn" href="{{ '/about/' | relative_url }}">About 자세히 보기</a>
-    <a class="btn" href="{{ '/reviews/' | relative_url }}">🧠 Paper Review</a>
-  </div>
 </div>
 
 <span class="kicker">Latest</span>
