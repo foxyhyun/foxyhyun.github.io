@@ -10,7 +10,7 @@ layout: post
 <div class="tag-buttons">
   <a href="#all" class="btn" data-target="all">All</a>
   <a href="#basicai" class="btn" data-target="basicai">BasicAI</a>
-  <a href="#medical" class="btn" data-target="medical">Medical</a>
+  <a href="#biomedicalimaging" class="btn" data-target="biomedicalimaging">Biomedical Imaging</a>
   <a href="#imageenhancement" class="btn" data-target="imageenhancement">Image Enhancement</a>
   <a href="#computervision" class="btn" data-target="computervision">Computer Vision</a>
   <a href="#anomalydetection" class="btn" data-target="anomalydetection">Anomaly Detection</a>
@@ -28,11 +28,11 @@ layout: post
   </ul>
 </section>
 
-<section class="pv-section" data-key="medical">
-  <h2>Medical</h2>
+<section class="pv-section" data-key="biomedicalimaging">
+  <h2>Biomedical Imaging</h2>
   <ul class="paper-list">
   {% for post in site.posts %}
-    {% if post.categories contains "PaperReview" and post.tags contains "Medical" %}
+    {% if post.categories contains "PaperReview" and post.tags contains "Biomedical Imaging" %}
       <li><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
         <time>{{ post.date | date: "%Y-%m-%d" }}</time></li>
     {% endif %}
