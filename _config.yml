@@ -10,6 +10,11 @@ plugins:
   - jekyll-seo-tag
   - jekyll-feed
 
+collections:
+  tutorials:
+    output: true
+    permalink: /tutorials/:path/
+
 defaults:
   - scope:
       path: ""       
@@ -17,6 +22,13 @@ defaults:
     values:
       layout: post              # 기본 포스트는 post.html 적용
       categories: ["PaperReview"]
+
+  - scope:
+      path: ""
+      type: tutorials
+    values:
+      layout: post
+      categories: ["Tutorial"]
 
 include:
   - _pages
@@ -27,3 +39,4 @@ markdown: kramdown
 kramdown:
   input: GFM
   math_engine: mathjax
+
