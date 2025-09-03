@@ -41,7 +41,7 @@ layout: post
 </section>
 
 <section class="pv-section" data-key="imageenhancement">
-  <h2>Image Enhancement</h2>
+  <h2>Image Enhancement for Microscopy Image</h2>
   <ul class="paper-list">
   {% for post in site.posts %}
     {% if post.categories contains "PaperReview" and post.tags contains "ImageEnhancement" %}
