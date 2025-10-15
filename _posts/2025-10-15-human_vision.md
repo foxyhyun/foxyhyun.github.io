@@ -10,47 +10,57 @@ mathjax: true
 ## Human vs Digital Image Processing
 
 인간은 빛, 소리, 압력 같은 물리적 자극을 감각기관으로 받아들이고, 이를 뇌에서 해석해 시각, 청각, 촉각 같은 **지각(Perception)** 으로 변환합니다.  
-즉, 단순 입력(Input)이 아니라 **Sensation(감각) → Process(해석) → Perception(지각)** 이라는 과정을 거쳐 인지가 이루어집니다.   
+즉, 단순 입력(Input)이 아니라 **Sensation(감각) → Process(해석) → Perception(지각)** 이라는 과정을 거쳐 인지가 이루어집니다.
 
-![Perception]({{ '/assets/tutorial_img/20251015/fig1.png' | relative_url }})  
+![Perception]({{ '/assets/tutorial_img/20251015/fig1.png' | relative_url }})
 
 인간의 눈은 카메라와 유사한 구조를 갖고 수용체를 통해 빛을 감지합니다.  
-Digital Image Processing은 이 생물학적 시각 시스템을 모델 삼아 이미지 센서 데이터를 처리하고 인간의 인지 과정에 맞게 보정, 향상하는 기술입니다. 
+Digital Image Processing은 이 생물학적 시각 시스템을 모델 삼아 이미지 센서 데이터를 처리하고 인간의 인지 과정에 맞게 보정, 향상하는 기술입니다.
 
 ---
 
-인간의 눈은 단순히 빛의 세기를 물리적 수치로 측정하지 않고, **대비(Contrast)와 맥락(Context)**에 따라 밝기를 다르게 지각하는 **비선형 시스템**입니다.  
-우리가 보는 이미지는 단순한 픽셀 값이 아니라, **조명(illumination) X 반사(reflection)** 으로 형성됩니다.  
-또한 눈은 **HDR(High Dynamic Range)** 특성을 지녀, 어둠 속에서도 사물을 구분하고 강한 햇빛 아래에서도 적응할 수 있습니다.  
+인간의 눈은 단순히 빛의 세기를 물리적 수치로 측정하지 않고, **대비(Contrast)와 맥락(Context)** 에 따라 밝기를 다르게 지각하는 **비선형 시스템**입니다.  
+우리가 보는 이미지는 단순한 픽셀 값이 아니라, **조명(illumination) × 반사(reflection)** 로 형성됩니다.
+
+![Illumination vs Reflection]({{ '/assets/tutorial_img/20251015/fig2.png' | relative_url }})
+
+또한 눈은 **HDR(High Dynamic Range)** 특성을 지녀, 어둠 속에서도 사물을 구분하고 강한 햇빛 아래에서도 적응할 수 있습니다.
 
 ---
 
-디지털 이미지는 실제 세상에서 오는 빛을 **Sampling**과 **Quantization** 과정을 거쳐 얻은 픽셀 값의 집합입니다. 
-- **Sampling** : 
-- **Quantization** : 
-이는 수학적으로 2D 함수 f(x,y)로 표현되며, Digital Image Processing은 이 픽셀 함수에 다양한 수학적 연산을 적용해 더 나은 시각적 결과를 만들어내는 과정입니다.  
+디지털 이미지는 실제 세상에서 오는 빛을 **Sampling** 과 **Quantization** 을 거쳐 얻은 픽셀 값의 집합입니다.
+
+- **Sampling**: 연속 장면 \(f(x,y)\)를 격자 간격 \(T_x, T_y\)로 샘플링하여  
+  \(g[m,n] = f(mT_x,\, nT_y)\) 꼴의 이산 영상으로 만드는 과정.  
+  고주파 성분을 안전하게 담으려면 **나이퀴스트 조건**을 만족해야 하며, 보통 **저역통과(anti-aliasing) 필터**를 선행합니다.
+
+- **Quantization**: 연속 강도값을 **유한한 레벨 \(L=2^b\)**(비트심도 \(b\))로 반올림하는 과정.  
+  양자화 스텝 \(\Delta\)가 작을수록 손실이 적고, 이상적 양자화 SNR은 \(\mathrm{SNR}_q \approx 6.02b + 1.76\ \mathrm{dB}\)로 증가합니다.
+
+이는 수학적으로 2D 함수 \(f(x,y)\)에 다양한 연산을 적용해 더 나은 시각적 결과를 만드는 과정입니다.
 
 ---
+
 ## 영상 품질 요소
 
-### Aperture  
-- Aperture가 크면 : 많은 빛이 들어오면서 여러 방향의 빛이 평균화 → Blurry
-- Aperture가 작으면 : 빛이 적게 들어와 어두워짐 + Diffraction(빛이 좁은 틈을 통과하며 퍼지는 현상) 때문에 Blurry  
+### Aperture
+- **Aperture가 크면**: 많은 빛이 들어오며 여러 방향의 빛이 평균화 → **Blurry**(DOF 얕아짐)
+- **Aperture가 작으면**: 빛이 적게 들어와 어두워짐 + **회절(Diffraction)** 때문에 **Blurry**
 
-### FOV(Field of View) vs DOF(Depth of Field)  
-- **FOV** : 카메라가 얼마나 넓게 볼 수 있는가(렌즈 초점거리 + 센서 크기에 의해 결정)  
-- **DOF** : 카메라가 얼마나 깊이까지 선명하게 볼 수 있는가(조리개, 피사체와의 거리, 초점거리의 영향)  
+### FOV(Field of View) vs DOF(Depth of Field)
+- **FOV**: 카메라가 얼마나 넓게 볼 수 있는가(렌즈 초점거리 + 센서 크기에 의해 결정)
+- **DOF**: 카메라가 얼마나 깊이까지 선명하게 볼 수 있는가(조리개, 피사체와의 거리, 초점거리의 영향)
 
-### Exposure을 결정하는 3 요소  
-1. ISO  
-  - 낮을수록 : 이미지가 깨끗함(노이즈 적음)  
-  - 높을수록 : 어두운 환경에서도 촬영 가능하지만 노이즈 증가  
+### Exposure을 결정하는 3 요소
 
-2. Shutter Speed  
-  - 빠를수록 : 순간 포착 가능  
-  - 느릴수록 : 노출 시간이 길어져 이미지가 밝아짐  
+1. **ISO**
+    - 낮을수록: 이미지가 깨끗함(노이즈 적음)
+    - 높을수록: 어두운 환경에서도 촬영 가능하지만 노이즈 증가
 
-3. Aperture  
-  - 조리개가 작을수록 : 빛이 적게 들어와 어두워짐
-  - 조리개가 클수록 : 더 밝아지면 DOF가 얉아짐  
+2. **Shutter Speed**
+    - 빠를수록: 순간 포착 가능
+    - 느릴수록: 노출 시간이 길어져 이미지가 밝아짐(모션 블러 증가)
 
+3. **Aperture**
+    - 조리개가 작을수록: 빛이 적게 들어와 어두워짐
+    - 조리개가 클수록: 더 밝아지며 **DOF가 얕아짐**
