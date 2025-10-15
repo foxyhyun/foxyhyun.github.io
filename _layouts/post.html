@@ -2,6 +2,10 @@
 layout: default
 ---
 
+{% if page.mathjax %}
+  {% include mathjax.html %}
+{% endif %}
+
 <article class="markdown-body">
   {{ content }}
 </article>

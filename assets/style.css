@@ -293,3 +293,31 @@ ul.pretty li::before{
 
 .post-content li > p { margin: 0; }
 .post-content ol li, .post-content ul li { color: inherit; opacity: 1; }
+
+/* 헤딩 색/두께 보정 (h3/h4도 강하게) */
+.page-card h3, .markdown-body h3,
+.page-card h4, .markdown-body h4 {
+  color: var(--text) !important;
+  font-weight: 800 !important;
+}
+
+/* 리스트 가독성 보정(불투명도 1, 글자색 상속) */
+.markdown-body ul li, .markdown-body ol li {
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+/* 리스트 안 수식도 밝게 */
+.mjx-container { color: var(--text) !important; }
+
+/* 헤딩/리스트 가독성 보정 */
+.markdown-body h3, .markdown-body h4 { 
+  color: var(--text) !important; 
+  font-weight: 800 !important; 
+}
+.markdown-body ul li, .markdown-body ol li { 
+  color: inherit !important; 
+  opacity: 1 !important; 
+}
+/* 수식도 밝게 */
+.mjx-container { color: var(--text) !important; }
