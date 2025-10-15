@@ -11,7 +11,9 @@ mathjax: true
 
 인간은 빛, 소리, 압력 같은 물리적 자극을 감각기관으로 받아들이고, 이를 뇌에서 해석해 시각, 청각, 촉각 같은 **지각(Perception)** 으로 변환합니다.  
 즉, 단순 입력(Input)이 아니라 **Sensation(감각) → Process(해석) → Perception(지각)** 이라는 과정을 거쳐 인지가 이루어집니다.   
-  
+
+![Perception]({{ '/assets/tutorial_img/20251015/fig1.png' | relative_url }})  
+
 인간의 눈은 카메라와 유사한 구조를 갖고 수용체를 통해 빛을 감지합니다.  
 Digital Image Processing은 이 생물학적 시각 시스템을 모델 삼아 이미지 센서 데이터를 처리하고 인간의 인지 과정에 맞게 보정, 향상하는 기술입니다. 
 
