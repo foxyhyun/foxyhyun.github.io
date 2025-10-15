@@ -290,3 +290,6 @@ ul.pretty li::before{
   color: #ffffff !important;
   text-shadow: 0 1px 0 rgba(0,0,0,.25);
 }
+
+.post-content li > p { margin: 0; }
+.post-content ol li, .post-content ul li { color: inherit; opacity: 1; }
