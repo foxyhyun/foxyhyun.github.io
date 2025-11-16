@@ -246,3 +246,30 @@ Z가 깊어질수록 원본 <b>out-of-focus</b> 이미지는 점점 더 흐려�
 기존 방법들보다 <b>구조 보존, 노이즈 억제, 시각적 일관성</b> 측면에서  
 더 우수한 out-of-focus 보정 성능을 달성한다.
 </p>
+
+<blockquote><b>Conclusion</b></blockquote>
+
+<p>
+이 논문은 <b>out-of-focus Microscopy image</b> 를  
+<b>in-focus image</b> 로 복원하기 위한 <b>Deblurring 네트워크</b>를 제안한다.  
+구조적으로는 <b>CycleGAN</b> 과 유사한 두 개의 Generator–Discriminator 구성을 사용하지만,  
+학습 데이터는 <mark>unpaired dataset</mark> 이 아니라  
+<mark>paired out-of-focus / in-focus dataset</mark> 이라는 점이 핵심적인 차이이다.
+</p>
+
+<p>
+즉, <b>Pix2Pix</b> 처럼 <b>정답 in-focus 이미지</b>를 직접 참조하면서 학습하되,  
+<b>CycleGAN-style</b> 의 <b>cycle-consistency</b> 와  
+<b>feature space content loss</b>, 그리고 <b>GAN loss</b> 를  
+함께 사용하는 <b>multi-component weighted loss function</b> 으로  
+구조 보존, 텍스처 복원, 시각적 자연스러움을 동시에 최적화한다.
+</p>
+
+<p>
+정량 지표(PSNR, SSIM, PCC)와 시각적 비교 결과에서  
+제안 방법은 기존 <b>Pix2Pix, CycleGAN, DeblurGAN 계열</b>보다  
+더 높은 성능을 보이며, 다양한 샘플과 여러 <b>Z-depth</b> 에서  
+일관된 <b>in-focus 복원 품질</b>을 달성한다.  
+따라서 이 모델은 out-of-focus 문제가 빈번한 현미경 영상에서  
+연구·진단의 신뢰도를 높이는 <b>practical한 Deblurring 솔루션</b>으로 볼 수 있다.
+</p>
