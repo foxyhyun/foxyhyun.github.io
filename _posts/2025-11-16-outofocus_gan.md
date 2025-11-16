@@ -10,7 +10,7 @@ paper: "https://www.sciencedirect.com/science/article/pii/S2001037022001192"
 
 ## Introduction
 <figure>
-  <img src="C:\Users\sihyun\Desktop\foxyhyun.github.io\assets\paper_img\oofgan\fig1.png" alt="Introduction figure" style="max-width:100%; border-radius:12px;">
+  <img src="C:/Users/sihyun/Desktop/foxyhyun.github.io/assets/paper_img/oofgan/fig1.png" alt="Introduction figure" style="max-width:100%; border-radius:12px;">
 </figure>
 
 <blockquote><b>Motivation</b></blockquote>
