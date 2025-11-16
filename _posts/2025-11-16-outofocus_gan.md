@@ -175,3 +175,74 @@ out-of-focus 이미지를 <b>G<sub>s</sub></b> 로 in-focus 로 보냈다가,
 노이즈 억제뿐 아니라 구조·텍스처 보존과 전체적인 패턴 일치 측면에서도  
 우수한 <b>in-focus 복원 성능</b>을 보여준다.
 </p>
+
+<figure>
+  <img src="/assets/paper_img/oofgan/fig5.png" alt="Qualitative comparison with other methods" style="max-width:100%; border-radius:12px;">
+</figure>
+
+<blockquote><b>Result – Comparison with Existing Methods</b></blockquote>
+
+<p>
+첫 번째 결과 그림은 <mark>out-of-focus 이미지</mark>를 입력으로 했을 때,  
+<b>L0-regularized, Pix2Pix, CycleGAN, DeblurGAN, DeblurGAN-V2</b> 그리고 <b>제안 방법(Ours)</b> 이  
+어떤 출력을 내는지 시각적으로 비교한 예시이다.
+</p>
+
+<p>
+파란색/빨간색 박스로 표시된 <b>국소 영역</b>을 보면,  
+기존 방법들은 세포 모양이 흐려지거나, 경계가 과도하게 날카로워지는 등  
+<b>노이즈 또는 구조 왜곡</b>이 남아 있는 반면,  
+<mark>Ours</mark>는 <b>in-focus 이미지</b>와 가까운 형태로  
+세포의 윤곽과 내부 텍스처를 더 잘 복원함을 확인할 수 있다.
+</p>
+
+<hr/>
+
+<figure>
+  <img src="/assets/paper_img/oofgan/fig6.png" alt="Single FOV correction" style="max-width:100%; border-radius:12px;">
+</figure>
+
+<blockquote><b>Result – Out-of-focus → Corrected → In-focus</b></blockquote>
+
+<p>
+두 번째 그림은 서로 다른 샘플(A, B, C)에 대해  
+<b>Out-of-focus</b>, <b>Corrected(제안 모델 출력)</b>, <b>In-focus</b> 를  
+한 줄에서 비교한 결과이다.
+</p>
+
+<p>
+각 샘플에서 <mark>Corrected</mark> 이미지는  
+원래 <b>out-of-focus</b> 이미지보다 명확한 에지와 세포 구조를 보여주며,  
+밝기와 콘트라스트도 <b>Ground Truth in-focus</b> 에 가깝게 맞춰져 있다.  
+특히 세포 내부의 세밀한 패턴이나 필라멘트 구조가 다시 드러나는 것을 통해  
+제안 모델이 단순 샤프닝이 아니라 <b>구조 복원</b>을 수행한다는 점을 알 수 있다.
+</p>
+
+<hr/>
+
+<figure>
+  <img src="/assets/paper_img/oofgan/fig7.png" alt="Z-stack deblurring across depths" style="max-width:100%; border-radius:12px;">
+</figure>
+
+<blockquote><b>Result – Z-stack Across Multiple Depths</b></blockquote>
+
+<p>
+세 번째 그림은 서로 다른 <b>Z-depth(Z=5~30)</b> 에서 획득한  
+<mark>Out-of-focus_A/B</mark>, 제안 모델의 <mark>Corrected_A/B</mark>,  
+그리고 <mark>In-focus_A/B</mark> 를 함께 보여주는 <b>Z-stack 결과</b>이다.
+</p>
+
+<p>
+Z가 깊어질수록 원본 <b>out-of-focus</b> 이미지는 점점 더 흐려지고  
+세포 경계가 사라지지만, 제안된 <b>Corrected</b> 결과는  
+각 Z에서 <b>in-focus 이미지와 유사한 구조·패턴</b>을 유지하고 있다.  
+이는 본 모델이 단일 깊이에 국한되지 않고,  
+<mark>여러 초점 깊이에서 일관된 deblurring 성능</mark>을 낸다는 것을 보여준다.
+</p>
+
+<p>
+정리하면, 시각적 결과와 정량적 지표(PSNR, SSIM, PCC)를 종합했을 때  
+제안한 <b>Deblurring CycleGAN with multi-component weighted loss</b> 는  
+기존 방법들보다 <b>구조 보존, 노이즈 억제, 시각적 일관성</b> 측면에서  
+더 우수한 out-of-focus 보정 성능을 달성한다.
+</p>
