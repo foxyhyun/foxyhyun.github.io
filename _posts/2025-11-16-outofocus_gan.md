@@ -121,3 +121,57 @@ out-of-focus 이미지를 <b>G<sub>s</sub></b> 로 in-focus 로 보냈다가,
 <b>“얼마나 구조·텍스처를 보존할지”</b>,  
 <b>“얼마나 변환 전·후를 일관되게 유지할지”</b> 의 비중을 조절하는 하이퍼파라미터로 볼 수 있다.
 </p>
+
+<figure>
+  <img src="/assets/paper_img/oofgan/fig4.png" alt="Evaluation metrics" style="max-width:100%; border-radius:12px;">
+</figure>
+
+<blockquote><b>Evaluation</b></blockquote>
+
+<p>
+이 논문에서는 제안한 <b>Deblurring CycleGAN</b> 의 성능을 정량적으로 평가하기 위해  
+세 가지 대표적인 화질 지표를 사용한다:  
+<b>Peak Signal-to-Noise Ratio (PSNR)</b>,  
+<b>Structural Similarity Index (SSIM)</b>,  
+<b>Pearson Correlation Coefficient (PCC)</b>.
+</p>
+
+<p>
+각 지표는 <b>복원된 in-focus 이미지</b>가 <b>Ground Truth in-focus 이미지</b>와  
+얼마나 비슷한지를 서로 다른 관점에서 측정한다.  
+모든 지표에서 값이 클수록 “더 좋은 복원 결과”를 의미한다.
+</p>
+
+<blockquote><b>Peak Signal-to-Noise Ratio (PSNR)</b></blockquote>
+
+<p>
+<b>PSNR</b> 은 이미지의 <b>전반적인 노이즈 수준</b>을 보는 지표로,  
+원본 신호 에너지에 비해 복원 오차(MSE)가 얼마나 작은지를 로그 스케일로 표현한다.  
+값이 클수록 <b>노이즈가 적고, 픽셀 단위 오차가 작다</b>는 뜻이다.
+</p>
+
+<blockquote><b>Structural Similarity Index (SSIM)</b></blockquote>
+
+<p>
+<b>SSIM</b> 은 단순한 픽셀 차이보다,  
+<b>구조(structure), 에지(edge), 콘트라스트(contrast)</b> 가  
+얼마나 잘 보존되었는지를 측정하는 지표이다.  
+범위는 보통 <b>0 ~ 1</b>이고, 1에 가까울수록  
+<b>원본과 구조적으로 매우 유사한 이미지</b>라고 해석할 수 있다.
+</p>
+
+<blockquote><b>Pearson Correlation Coefficient (PCC)</b></blockquote>
+
+<p>
+<b>PCC</b> 는 두 이미지의 <b>픽셀 intensity 분포</b>가  
+얼마나 비슷하게 움직이는지를 보는 <b>상관계수</b>이다.  
+범위는 <b>-1 ~ 1</b>이며, 1에 가까울수록  
+<b>“밝을 때 같이 밝고, 어두울 때 같이 어두운” 패턴</b>을 잘 유지한다는 의미이다.
+</p>
+
+<p>
+실험 결과, 제안한 방법은 기존 <b>Pix2Pix, CycleGAN, DeblurGAN</b> 계열보다  
+<b>PSNR, SSIM, PCC</b> 모두에서 더 높은 값을 기록하여,  
+노이즈 억제뿐 아니라 구조·텍스처 보존과 전체적인 패턴 일치 측면에서도  
+우수한 <b>in-focus 복원 성능</b>을 보여준다.
+</p>
