@@ -64,6 +64,18 @@ layout: post
   </ul>
 </section>
 
+<section class="pv-section" data-key="segmentation">
+  <h2>Segmentation</h2>
+  <ul class="paper-list">
+  {% for post in site.posts %}
+    {% if post.categories contains "PaperReview" and post.tags contains "Segmentation" %}
+      <li><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <time>{{ post.date | date: "%Y-%m-%d" }}</time></li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+</section>
+
 <section class="pv-section" data-key="anomalydetection">
   <h2>Anomaly Detection</h2>
   <ul class="paper-list">
