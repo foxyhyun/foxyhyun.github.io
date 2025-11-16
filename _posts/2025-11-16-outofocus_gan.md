@@ -1,5 +1,5 @@
 ---
-title: "[Image Enhancement] Correction of out-of-focus microscopic images by deep learning"
+title: "[Image Enhancement for Microscopy Image] Correction of out-of-focus microscopic images by deep learning"
 categories: [PaperReview]
 tags: [Deblurring, Microscopy, CycleGAN]
 year: "2022"
