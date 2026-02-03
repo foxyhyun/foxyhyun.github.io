@@ -1,7 +1,7 @@
 ---
-title: "[Denoising] Introduction of Image Denoising & Enhancement for Microscopic Image 
+title: "[Denoising] Introduction of Image Denoising & Enhancement for Microscopic Image"
 categories: [Tutorial]
-tags: [Image Processing]
+tags: [ImageProcessing]
 year: "2026"
 layout: post
 ---
