@@ -1,6 +1,6 @@
 ---
 title: "[Denoising] Introduction of Image Denoising & Enhancement for Microscopic Image 
-categories: [tutorials]
+categories: [Tutorial]
 tags: [Image Processing]
 year: "2026"
 layout: post
@@ -48,3 +48,12 @@ Salt-and-Pepper Noise입니다.
 예를들어, intensity가 100인 무언가를 측정한다고 생각해볼게요.
 하지만 실제 측정된 값은 94, 106, 99, 101일 수 있습니다.
 이러한 차이는 Poisson Distribution을 따른다고 가정하며, 이 측정의 차이를 Noise로 취급합니다.
+
+<figure>
+  <img src="/assets/tutorial_img/0120/fig6.png" alt="Figure 6" style="max-width:100%; border-radius:12px;">
+</figure>
+마지막으로 Speckle Noise입니다. 
+Speckle Noise는 이전 Noise들과는 다르게 y = x*n처럼 signal에 곱해지는 형태의 Noise입니다.
+주로 파동 base source인 laser 기반 imaging이나 Ultrasound에서 나타나며, 파동이 서로 겹치면서 생기는 간섭 패턴에 의해 생깁니다.
+재밌게도, Noise를 Multiply하기 때문에 구조가 조금 움직여도 Noise가 같이 따라오는 구조라서 Noise를 추적하여 이동량을 측정하는 연구도 있다고하네요.
+
