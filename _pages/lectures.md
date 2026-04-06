@@ -22,14 +22,6 @@ layout: default
     <div class="course-meta">
       <span class="course-count">{{ cv_lectures.size }} Lectures</span>
     </div>
-    <ol class="course-preview-list">
-      {% for lec in cv_lectures limit: 3 %}
-        <li><a href="{{ lec.url | relative_url }}">{{ lec.title }}</a></li>
-      {% endfor %}
-      {% if cv_lectures.size > 3 %}
-        <li class="more">+ {{ cv_lectures.size | minus: 3 }} more</li>
-      {% endif %}
-    </ol>
     <a class="course-start-btn" href="{{ cv_lectures.first.url | relative_url }}">Start Course →</a>
   </div>
   {% endif %}
@@ -46,14 +38,6 @@ layout: default
     <div class="course-meta">
       <span class="course-count">{{ ai_lectures.size }} Lectures</span>
     </div>
-    <ol class="course-preview-list">
-      {% for lec in ai_lectures limit: 3 %}
-        <li><a href="{{ lec.url | relative_url }}">{{ lec.title }}</a></li>
-      {% endfor %}
-      {% if ai_lectures.size > 3 %}
-        <li class="more">+ {{ ai_lectures.size | minus: 3 }} more</li>
-      {% endif %}
-    </ol>
     <a class="course-start-btn" href="{{ ai_lectures.first.url | relative_url }}">Start Course →</a>
   </div>
   {% endif %}

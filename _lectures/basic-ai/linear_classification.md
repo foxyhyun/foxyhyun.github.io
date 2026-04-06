@@ -2,7 +2,7 @@
 title: "Linear Classification"
 course: computer-vision
 course_title: "Computer Vision"
-order: 1
+order: 4
 description: "Image Classification의 한계를 넘어 Parametric Approach를 도입하고, SVM Loss와 Softmax로 학습 가능한 분류기를 만드는 방법을 다룹니다."
 mathjax: true
 ---
