@@ -42,6 +42,7 @@
           <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}active{% endif %}">Home</a>
           <a href="{{ '/reviews/' | relative_url }}" class="{% if page.url contains '/reviews/' %}active{% endif %}">Paper Review</a>
           <a href="{{ '/tutorials/' | relative_url }}" class="{% if page.url contains '/tutorials/' %}active{% endif %}">Tutorials</a>
+          <a href="{{ '/lectures/' | relative_url }}" class="{% if page.url contains '/lectures/' %}active{% endif %}">Lectures</a>
 
           <a href="{{ '/about/' | relative_url }}" class="{% if page.url contains '/about/' %}active{% endif %}">About</a>
         </nav>

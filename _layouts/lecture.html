@@ -1,0 +1,78 @@
+---
+layout: default
+---
+
+{% assign course_lectures = site.lectures | where: "course", page.course | sort: "order" %}
+
+{% assign current_index = 0 %}
+{% for lec in course_lectures %}
+  {% if lec.url == page.url %}
+    {% assign current_index = forloop.index0 %}
+  {% endif %}
+{% endfor %}
+
+{% assign prev_index = current_index | minus: 1 %}
+{% assign next_index = current_index | plus: 1 %}
+
+{% if current_index > 0 %}
+  {% assign prev_lecture = course_lectures[prev_index] %}
+{% endif %}
+{% assign total = course_lectures | size %}
+{% assign max_index = total | minus: 1 %}
+{% if current_index < max_index %}
+  {% assign next_lecture = course_lectures[next_index] %}
+{% endif %}
+
+<div class="lecture-layout">
+
+  <!-- Sidebar -->
+  <aside class="lecture-sidebar">
+    <a class="sidebar-back" href="{{ '/lectures/' | relative_url }}">← All Courses</a>
+    <div class="sidebar-course-title">{{ page.course_title }}</div>
+    <ol class="lesson-list">
+      {% for lec in course_lectures %}
+        <li class="{% if lec.url == page.url %}active{% endif %}">
+          <a href="{{ lec.url | relative_url }}">
+            <span class="lesson-num">{{ forloop.index }}</span>
+            <span class="lesson-title">{{ lec.title }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ol>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="lecture-main">
+    <div class="lecture-header">
+      <span class="lecture-badge">Lecture {{ page.order }}</span>
+      <h1 class="lecture-title">{{ page.title }}</h1>
+      {% if page.description %}
+        <p class="lecture-desc">{{ page.description }}</p>
+      {% endif %}
+    </div>
+
+    <article class="markdown-body lecture-body">
+      {{ content }}
+    </article>
+
+    <nav class="lecture-nav">
+      <div class="lecture-nav-prev">
+        {% if prev_lecture %}
+          <a href="{{ prev_lecture.url | relative_url }}" class="nav-btn">
+            <span class="nav-label">← Previous</span>
+            <span class="nav-title">{{ prev_lecture.title }}</span>
+          </a>
+        {% endif %}
+      </div>
+      <div class="lecture-nav-next">
+        {% if next_lecture %}
+          <a href="{{ next_lecture.url | relative_url }}" class="nav-btn">
+            <span class="nav-label">Next →</span>
+            <span class="nav-title">{{ next_lecture.title }}</span>
+          </a>
+        {% endif %}
+      </div>
+    </nav>
+  </div>
+
+</div>

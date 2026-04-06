@@ -14,13 +14,16 @@ collections:
   tutorials:
     output: true
     permalink: /tutorials/:path/
+  lectures:
+    output: true
+    permalink: /lectures/:path/
 
 defaults:
   - scope:
-      path: ""       
+      path: ""
       type: posts
     values:
-      layout: post              # 기본 포스트는 post.html 적용
+      layout: post
       categories: ["PaperReview"]
 
   - scope:
@@ -29,6 +32,13 @@ defaults:
     values:
       layout: post
       categories: ["Tutorial"]
+
+  - scope:
+      path: ""
+      type: lectures
+    values:
+      layout: lecture
+      categories: ["Lecture"]
 
 include:
   - _pages
