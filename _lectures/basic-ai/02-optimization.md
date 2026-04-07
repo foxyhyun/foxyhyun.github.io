@@ -1,7 +1,7 @@
 ---
 title: "Optimization"
-course: computer-vision
-course_title: "Computer Vision"
+course: basic-ai
+course_title: "Basic of AI"
 order: 2
 description: "Gradient Descent부터 SGD, Momentum, RMSProp, Adam까지 딥러닝 최적화 알고리즘의 흐름을 정리합니다."
 mathjax: true
