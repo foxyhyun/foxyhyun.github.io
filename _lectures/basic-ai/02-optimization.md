@@ -13,13 +13,9 @@ mathjax: true
 
 전체 Loss와 그 gradient는 다음과 같이 정의됩니다.
 
-$$
-L(W) = \frac{1}{N}\sum_{i=1}^N L_i(x_i, y_i, W) + \lambda R(W)
-$$
+$$L(W) = \frac{1}{N}\sum_{i=1}^N L_i(x_i, y_i, W) + \lambda R(W)$$
 
-$$
-\nabla_W L(W) = \frac{1}{N}\sum_{i=1}^N \nabla_W L_i(x_i, y_i, W) + \lambda \nabla_W R(W)
-$$
+$$\nabla_W L(W) = \frac{1}{N}\sum_{i=1}^N \nabla_W L_i(x_i, y_i, W) + \lambda \nabla_W R(W)$$
 
 모든 데이터에 대해 gradient를 계산하면 계산량이 매우 많아집니다. 이를 해결하기 위한 것이 SGD입니다.
 
@@ -31,9 +27,7 @@ $$
 
 전체 데이터 대신 **mini-batch** 단위로 gradient를 근사해 업데이트합니다.
 
-$$
-x_{t+1} = x_t - \alpha \nabla f(x_t)
-$$
+$$x_{t+1} = x_t - \alpha \nabla f(x_t)$$
 
 직관적으로는 "Loss 표면에서 가장 가파르게 내려가는 방향으로 조금씩 이동한다"고 이해할 수 있습니다. 하지만 SGD에는 몇 가지 한계가 있습니다.
 
@@ -41,7 +35,7 @@ $$
 - Local minimum이나 saddle point 근처에서 gradient가 0에 가까워져 **학습이 정체**됩니다.
 - Mini-batch로 gradient를 근사하므로 업데이트마다 **noise**가 포함됩니다.
 
-<span style="color:#60a5fa">딥러닝에서 saddle point는 생각보다 훨씬 흔합니다. 파라미터 수가 수백만 개인 고차원 공간에서는 어떤 방향으로는 Loss가 올라가고 다른 방향으로는 내려가는 지점이 매우 많습니다. SGD는 이런 지점에서 gradient ≈ 0이 되어 오랫동안 멈춰 있을 수 있습니다. Local minimum보다 saddle point가 실제로 더 문제가 되는 경우가 많습니다.</span>
+<span style="color:#60a5fa">딥러닝에서 **saddle point**는 생각보다 훨씬 흔합니다. 파라미터 수가 수백만 개인 고차원 공간에서는 어떤 방향으로는 Loss가 올라가고 다른 방향으로는 내려가는 지점이 매우 많습니다. SGD는 이런 지점에서 gradient ≈ 0이 되어 오랫동안 멈춰 있을 수 있습니다. **Local minimum**보다 saddle point가 실제로 더 문제가 되는 경우가 많습니다.</span>
 
 ---
 
@@ -49,13 +43,9 @@ $$
 
 SGD는 매번 현재 gradient만 보고 움직입니다. Momentum은 **이전 업데이트 방향(velocity)**도 함께 반영해 진동을 줄이고 수렴을 가속합니다. 공이 언덕을 굴러 내려오듯, 한번 방향이 잡히면 그 방향으로 계속 가속되는 효과입니다.
 
-$$
-v_{t+1} = \rho v_t - \alpha \nabla f(x_t)
-$$
+$$v_{t+1} = \rho v_t - \alpha \nabla f(x_t)$$
 
-$$
-x_{t+1} = x_t + v_{t+1}
-$$
+$$x_{t+1} = x_t + v_{t+1}$$
 
 - $\rho$는 보통 0.9 또는 0.99를 사용합니다. 이전 velocity를 얼마나 유지할지 결정합니다.
 - 모든 파라미터에 동일한 learning rate를 적용합니다.
@@ -69,20 +59,16 @@ $$
 
 Momentum이 "방향"을 개선했다면, RMSProp은 **step 크기**를 파라미터마다 다르게 조절합니다.
 
-$$
-s_{t+1} = \beta s_t + (1-\beta)(\nabla f(x_t))^2
-$$
+$$s_{t+1} = \beta s_t + (1-\beta)(\nabla f(x_t))^2$$
 
-$$
-x_{t+1} = x_t - \frac{\alpha}{\sqrt{s_{t+1}} + \epsilon} \nabla f(x_t)
-$$
+$$x_{t+1} = x_t - \frac{\alpha}{\sqrt{s_{t+1}} + \epsilon} \nabla f(x_t)$$
 
 - gradient가 자주 크게 발생하는 방향 → $s$가 커져 → 분모가 커져 → update **작게**
 - gradient가 작은 방향 → $s$가 작아져 → 분모가 작아져 → update **크게**
 
 이를 통해 가파른 방향의 진동을 줄이고, 완만한 방향의 수렴을 가속합니다.
 
-<span style="color:#60a5fa">RMSProp의 아이디어는 **AdaGrad**에서 비롯됩니다. AdaGrad는 지금까지의 gradient 제곱합을 누적해 learning rate를 조절하는데, 학습이 길어질수록 분모가 계속 커져 learning rate가 0에 수렴해버리는 문제가 있습니다. RMSProp은 지수 이동 평균(EMA)으로 과거 gradient의 영향을 감쇠시켜 이 문제를 해결합니다. $\epsilon$은 분모가 0이 되는 것을 방지하기 위한 매우 작은 값(보통 1e-8)입니다.</span>
+<span style="color:#60a5fa">RMSProp의 아이디어는 **AdaGrad**에서 비롯됩니다. AdaGrad는 지금까지의 gradient 제곱합을 누적해 learning rate를 조절하는데, 학습이 길어질수록 분모가 계속 커져 learning rate가 0에 수렴해버리는 문제가 있습니다. RMSProp은 **지수 이동 평균(EMA)**으로 과거 gradient의 영향을 감쇠시켜 이 문제를 해결합니다. $\epsilon$은 분모가 0이 되는 것을 방지하기 위한 매우 작은 값(보통 1e-8)입니다.</span>
 
 ---
 
@@ -90,17 +76,11 @@ $$
 
 **Momentum + RMSProp**을 결합한 알고리즘입니다. 방향은 Momentum으로, step 크기는 RMSProp처럼 적응적으로 조절합니다. 현재 딥러닝에서 가장 널리 사용되는 optimizer입니다.
 
-$$
-m_{t+1} = \beta_1 m_t + (1-\beta_1)\nabla f(x_t) \quad \text{(1차 모멘트, 방향)}
-$$
+$$m_{t+1} = \beta_1 m_t + (1-\beta_1)\nabla f(x_t) \quad \text{(1차 모멘트, 방향)}$$
 
-$$
-v_{t+1} = \beta_2 v_t + (1-\beta_2)(\nabla f(x_t))^2 \quad \text{(2차 모멘트, 크기)}
-$$
+$$v_{t+1} = \beta_2 v_t + (1-\beta_2)(\nabla f(x_t))^2 \quad \text{(2차 모멘트, 크기)}$$
 
-$$
-x_{t+1} = x_t - \frac{\alpha \hat{m}_{t+1}}{\sqrt{\hat{v}_{t+1}} + \epsilon}
-$$
+$$x_{t+1} = x_t - \frac{\alpha \hat{m}_{t+1}}{\sqrt{\hat{v}_{t+1}} + \epsilon}$$
 
 권장 하이퍼파라미터:
 
@@ -112,7 +92,7 @@ $$
 
 최근에는 **AdamW** (Weight Decay를 gradient가 아닌 파라미터에 직접 적용)가 더 많이 사용됩니다.
 
-<span style="color:#60a5fa">수식에서 $\hat{m}$과 $\hat{v}$는 **bias correction** 항입니다. 학습 초반에는 $m$과 $v$가 0으로 초기화되어 있어 실제 gradient보다 작게 추정되는 문제가 생깁니다. 이를 $\hat{m} = m / (1-\beta_1^t)$로 보정해 초반 업데이트를 안정화합니다. Adam이 대부분의 상황에서 잘 동작하는 이유 중 하나입니다. AdamW와 일반 Adam의 차이는 weight decay의 적용 방식에 있습니다. 일반 Adam은 L2 regularization을 gradient에 추가하지만, AdamW는 파라미터에 직접 decay를 적용해 adaptive learning rate의 영향을 받지 않도록 합니다. Transformer 계열 모델에서는 AdamW가 표준입니다.</span>
+<span style="color:#60a5fa">수식에서 $\hat{m}$과 $\hat{v}$는 **bias correction** 항입니다. 학습 초반에는 $m$과 $v$가 0으로 초기화되어 있어 실제 gradient보다 작게 추정되는 문제가 생깁니다. 이를 $\hat{m} = m / (1-\beta_1^t)$로 보정해 초반 업데이트를 안정화합니다. **AdamW**와 일반 Adam의 차이는 weight decay의 적용 방식에 있습니다. 일반 Adam은 L2 regularization을 gradient에 추가하지만, AdamW는 파라미터에 직접 decay를 적용해 adaptive learning rate의 영향을 받지 않도록 합니다. Transformer 계열 모델에서는 AdamW가 표준입니다.</span>
 
 ---
 
@@ -129,7 +109,7 @@ $$
 
 대규모 딥러닝 모델에는 계산 효율이 훨씬 좋은 **1차 최적화**가 사실상 표준입니다.
 
-<span style="color:#60a5fa">2차 최적화가 이론적으로는 더 정확하지만 실용적이지 않은 이유는 Hessian 행렬의 크기 때문입니다. 파라미터가 N개라면 Hessian은 N×N 행렬입니다. 현대 딥러닝 모델의 파라미터가 수억 개라면 Hessian은 수억×수억 크기가 되어 저장조차 불가능합니다. 이를 해결하려는 시도로 Hessian을 근사하는 **L-BFGS** 같은 방법이 있지만, 여전히 mini-batch 환경에서는 불안정하고 대규모 모델에는 맞지 않습니다.</span>
+<span style="color:#60a5fa">2차 최적화가 이론적으로는 더 정확하지만 실용적이지 않은 이유는 **Hessian** 행렬의 크기 때문입니다. 파라미터가 N개라면 Hessian은 N×N 행렬입니다. 현대 딥러닝 모델의 파라미터가 수억 개라면 저장조차 불가능합니다. 이를 해결하려는 시도로 Hessian을 근사하는 **L-BFGS** 같은 방법이 있지만, 여전히 mini-batch 환경에서는 불안정하고 대규모 모델에는 맞지 않습니다.</span>
 
 ---
 
@@ -151,7 +131,7 @@ $$
 $m$과 $v$가 0으로 초기화되어 학습 초반에 실제 값보다 작게 추정되기 때문입니다. $1/(1-\beta^t)$로 보정해 초반 업데이트를 안정화합니다.
 
 6. **AdamW가 Adam과 다른 점은?**
-Adam은 L2 regularization을 gradient에 더해 적용하는데, 이러면 adaptive learning rate의 영향을 받아 weight decay 효과가 불균일해집니다. AdamW는 파라미터에 decay를 직접 적용해 이 문제를 해결합니다.
+Adam은 L2 regularization을 gradient에 더해 적용하는데, adaptive learning rate의 영향을 받아 weight decay 효과가 불균일해집니다. AdamW는 파라미터에 decay를 직접 적용해 이 문제를 해결합니다.
 
 7. **2차 최적화가 딥러닝에서 사용되지 않는 이유는?**
 파라미터 수가 N개일 때 Hessian 행렬이 N×N 크기라 수억 개 파라미터를 가진 현대 모델에서는 저장 자체가 불가능합니다.
