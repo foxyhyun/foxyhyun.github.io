@@ -158,9 +158,13 @@ $$L_i = -\log\left(\frac{e^{s_{y_i}}}{\sum_k e^{s_k}}\right)$$
 | Loss의 최솟값/최댓값은? | 최솟값 0 (확률이 1일 때), 최댓값 ∞ |
 | 초기화 시 모든 s ≈ 0이면 예상 loss는? | log(C) |
 
-<span style="color:#60a5fa">초기화 시 loss가 log(C)인 이유를 직관적으로 이해해봅시다. s ≈ 0이면 exp(s) ≈ 1이므로 모든 클래스의 확률이 1/C로 균등해집니다. 정답 확률도 1/C이므로 $-\log(1/C) = \log(C)$가 됩니다. 예를 들어 10개 클래스라면 초기 loss는 log(10) ≈ 2.3이어야 합니다. 학습을 시작했을 때 loss가 이 값 근처인지 확인하는 것은 구현이 올바른지 점검하는 유용한 sanity check입니다.<br><br>또한 수치 안정성을 위해 실제 구현에서는 exp 계산 전에 모든 score에서 최댓값을 빼줍니다. $e^{s_j - \max s}$처럼요. 결과 확률은 동일하지만, 그대로 exp를 취하면 큰 수가 들어왔을 때 overflow가 발생할 수 있기 때문입니다.</span>
+<span style="color:#60a5fa">초기화 시 loss가 log(C)인 이유를 직관적으로 이해해봅시다. s ≈ 0이면 exp(s) ≈ 1이므로 모든 클래스의 확률이 1/C로 균등해집니다. 정답 확률도 1/C이므로 $-\log(1/C) = \log(C)$가 됩니다. 예를 들어 10개 클래스라면 초기 loss는 log(10) ≈ 2.3이어야 합니다. 학습 시작 시 이 값 근처인지 확인하는 것은 구현이 올바른지 점검하는 **sanity check**입니다.<br><br>또한 수치 안정성을 위해 실제 구현에서는 exp 계산 전에 모든 score에서 최댓값을 빼줍니다.</span>
 
-### SVM vs. Softmax
+$$P(Y=k \mid X=x_i) = \frac{e^{s_k - \max_j s_j}}{\sum_j e^{s_j - \max_j s_j}}$$
+
+<span style="color:#60a5fa">수학적으로 결과 확률은 동일하지만, 분자/분모에서 동일한 값을 나눠 exp의 입력이 항상 0 이하가 되어 **overflow를 방지**할 수 있습니다.</span>
+
+### SVM vs Softmax
 
 두 classifier의 가장 큰 차이는 **정답이 충분히 높을 때의 태도**입니다.
 
@@ -184,7 +188,13 @@ $$L = \underbrace{\frac{1}{N} \sum_i L_i}_{\text{data loss}} + \underbrace{\lamb
 
 data loss만 최소화하면 W가 훈련 데이터의 노이즈까지 외워버릴 수 있습니다. Regularization은 W가 필요 이상으로 커지지 않도록 페널티를 줘서, 더 단순하고 일반화 잘 되는 모델을 유도합니다.
 
-<span style="color:#60a5fa">L2와 L1은 선호하는 가중치의 형태가 다릅니다. **L2** ($\sum W^2$)는 모든 가중치를 전체적으로 균등하게 작게 만들고, **L1** ($\sum |W|$)은 불필요한 가중치를 정확히 0으로 만드는 sparse한 해를 선호합니다. $\lambda$가 클수록 regularization이 강해져 모델이 단순해지고, 너무 크면 underfitting이 생길 수 있습니다. 이 균형을 맞추는 것이 hyperparameter 튜닝의 핵심 중 하나입니다.</span>
+대표적인 Regularization 방식은 다음과 같습니다.
+
+$$R(W) = \sum_k \sum_l W_{k,l}^2 \quad \text{(L2, Weight Decay)}$$
+
+$$R(W) = \sum_k \sum_l |W_{k,l}| \quad \text{(L1)}$$
+
+<span style="color:#60a5fa">**L2**와 **L1**은 선호하는 가중치의 형태가 다릅니다. L2는 모든 가중치를 전체적으로 균등하게 작게 만들고, L1은 불필요한 가중치를 정확히 0으로 만드는 **sparse**한 해를 선호합니다. $\lambda$가 클수록 regularization이 강해져 모델이 단순해지고, 너무 크면 underfitting이 생길 수 있습니다. 이 균형을 맞추는 것이 hyperparameter 튜닝의 핵심 중 하나입니다.</span>
 
 ---
 
