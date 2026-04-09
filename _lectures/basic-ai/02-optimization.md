@@ -29,6 +29,12 @@ $$\nabla_W L(W) = \frac{1}{N}\sum_{i=1}^N \nabla_W L_i(x_i, y_i, W) + \lambda \n
 
 $$x_{t+1} = x_t - \alpha \nabla f(x_t)$$
 
+```python
+def SGD(x):
+    dx = compute_gradient(x)
+    x -= lr * dx
+```
+
 직관적으로는 "Loss 표면에서 가장 가파르게 내려가는 방향으로 조금씩 이동한다"고 이해할 수 있습니다. 하지만 SGD에는 몇 가지 한계가 있습니다.
 
 - Loss surface가 한 방향으로 가파르고 다른 방향으로 완만할 때 **지그재그로 진동**하며 느리게 수렴합니다.
@@ -47,6 +53,13 @@ $$v_{t+1} = \rho v_t - \alpha \nabla f(x_t)$$
 
 $$x_{t+1} = x_t + v_{t+1}$$
 
+```python
+def Momentum(x):
+    dx = compute_gradient(x)
+    v = rho * v + dx
+    x -= lr * v
+```
+
 - $\rho$는 보통 0.9 또는 0.99를 사용합니다. 이전 velocity를 얼마나 유지할지 결정합니다.
 - 모든 파라미터에 동일한 learning rate를 적용합니다.
 - Saddle point나 local minimum 근처에서도 이전 velocity 덕분에 더 빠르게 탈출할 수 있습니다.
@@ -62,6 +75,13 @@ Momentum이 "방향"을 개선했다면, RMSProp은 **step 크기**를 파라미
 $$s_{t+1} = \beta s_t + (1-\beta)(\nabla f(x_t))^2$$
 
 $$x_{t+1} = x_t - \frac{\alpha}{\sqrt{s_{t+1}} + \epsilon} \nabla f(x_t)$$
+
+```python
+def RMSProp(x):
+    dx = compute_gradient(x)
+    s = beta * s + (1 - beta) * dx * dx
+    x -= lr * dx / (np.sqrt(s) + 1e-8)
+```
 
 - gradient가 자주 크게 발생하는 방향 → $s$가 커져 → 분모가 커져 → update **작게**
 - gradient가 작은 방향 → $s$가 작아져 → 분모가 작아져 → update **크게**
@@ -81,6 +101,30 @@ $$m_{t+1} = \beta_1 m_t + (1-\beta_1)\nabla f(x_t) \quad \text{(1차 모멘트, 
 $$v_{t+1} = \beta_2 v_t + (1-\beta_2)(\nabla f(x_t))^2 \quad \text{(2차 모멘트, 크기)}$$
 
 $$x_{t+1} = x_t - \frac{\alpha \hat{m}_{t+1}}{\sqrt{\hat{v}_{t+1}} + \epsilon}$$
+
+코드로 표현하면 아래와 같습니다. 빨간 박스가 Momentum, 파란 박스가 RMSProp, 초록 박스가 Bias Correction에 해당합니다.
+
+```python
+# Adam (full form)
+first_moment  = 0
+second_moment = 0
+
+for t in range(1, num_iterations):
+    dx = compute_gradient(x)
+
+    # Momentum — 1차 모멘트 (방향)
+    first_moment  = beta1 * first_moment  + (1 - beta1) * dx
+
+    # RMSProp — 2차 모멘트 (크기)
+    second_moment = beta2 * second_moment + (1 - beta2) * dx * dx
+
+    # Bias correction — 초기 0에서 시작하는 편향 보정
+    first_unbias  = first_moment  / (1 - beta1 ** t)
+    second_unbias = second_moment / (1 - beta2 ** t)
+
+    # 파라미터 업데이트
+    x -= learning_rate * first_unbias / (np.sqrt(second_unbias) + 1e-7)
+```
 
 권장 하이퍼파라미터:
 
