@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -n '\\\\$[^$]*>[^$]*\\\\$' \"/c/Users/sihyun/Desktop/foxyhyun.github.io/_lectures/basic-ai/02-optimization.md\")"
+    ]
+  }
+}
