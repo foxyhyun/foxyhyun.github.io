@@ -130,8 +130,8 @@ for t in range(1, num_iterations):
 
 | 파라미터 | 권장값 |
 |---|---|
-| Momentum ($\beta_1$) | 0.9 |
-| RMSProp ($\beta_2$) | 0.999 |
+| Momentum ($$beta_1$$) | 0.9 |
+| RMSProp ($$beta_2$$) | 0.999 |
 | Learning Rate | 1e-3 또는 5e-4 |
 
 최근에는 **AdamW** (Weight Decay를 gradient가 아닌 파라미터에 직접 적용)가 더 많이 사용됩니다.
