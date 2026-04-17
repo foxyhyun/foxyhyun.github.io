@@ -2,7 +2,7 @@
 title: "Attention & Transformer"
 course: basic-ai
 course_title: "Basic of AI"
-order: 5
+order: 6
 description: "CNN과 Self-Attention의 차이부터 Attention 메커니즘, Transformer Encoder 구조까지 정리합니다."
 mathjax: true
 ---

@@ -2,7 +2,7 @@
 title: "Vision Transformer"
 course: basic-ai
 course_title: "Basic of AI"
-order: 6
+order: 7
 description: "ViT의 구조와 Patch Embedding, Position Encoding, Swin Transformer, MLP-Mixer, Diff Transformer까지 정리합니다."
 mathjax: true
 ---
