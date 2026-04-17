@@ -2,7 +2,7 @@
 title: "Attention & Transformer"
 course: computer-vision
 course_title: "Computer Vision"
-order: 6
+order: 3
 description: "CNN과 Self-Attention의 차이부터 Attention 메커니즘, Transformer Encoder 구조까지 정리합니다."
 mathjax: true
 ---

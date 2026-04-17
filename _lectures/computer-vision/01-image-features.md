@@ -2,7 +2,7 @@
 title: "Image Features"
 course: computer-vision
 course_title: "Computer Vision"
-order: 4
+order: 1
 description: "딥러닝 이전에 이미지를 어떻게 표현했는지, Feature Transform부터 HOG, Bag of Words까지 전통적인 이미지 특징 추출 방법을 살펴봅니다."
 mathjax: true
 ---

@@ -2,7 +2,7 @@
 title: "Convolutional Neural Network"
 course: computer-vision
 course_title: "Computer Vision"
-order: 5
+order: 2
 description: "1D/2D Convolution부터 파라미터 공유, Shift Equivariance, Sparsity까지 CNN의 핵심 원리를 정리합니다."
 mathjax: true
 ---
