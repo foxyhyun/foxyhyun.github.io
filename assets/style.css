@@ -573,6 +573,13 @@ span[style*="color:#60a5fa"] b {
 .lecture-body {
   font-size: 1.02rem;
   line-height: 1.8;
+  overflow-x: hidden;
+}
+.lecture-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
 }
 
 /* Prev / Next navigation */
