@@ -13,6 +13,7 @@ layout: post
   <a href="#biomedicalimaging" class="btn" data-target="biomedicalimaging">Biomedical Imaging</a>
   <a href="#imageenhancement" class="btn" data-target="imageenhancement">Image Enhancement</a>
   <a href="#computervision" class="btn" data-target="computervision">Computer Vision</a>
+  <a href="#3dreconstruction" class="btn" data-target="3dreconstruction">3D Reconstruction</a>
   <a href="#anomalydetection" class="btn" data-target="anomalydetection">Anomaly Detection</a>
 </div>
 
@@ -57,6 +58,18 @@ layout: post
   <ul class="paper-list">
   {% for post in site.posts %}
     {% if post.categories contains "PaperReview" and post.tags contains "ComputerVision" %}
+      <li><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <time>{{ post.date | date: "%Y-%m-%d" }}</time></li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+</section>
+
+<section class="pv-section" data-key="3dreconstruction">
+  <h2>3D Reconstruction for Microscopy</h2>
+  <ul class="paper-list">
+  {% for post in site.posts %}
+    {% if post.categories contains "PaperReview" and post.tags contains "3DReconstruction" %}
       <li><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
         <time>{{ post.date | date: "%Y-%m-%d" }}</time></li>
     {% endif %}
