@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -n '\\\\$[^$]*>[^$]*\\\\$' \"/c/Users/sihyun/Desktop/foxyhyun.github.io/_lectures/basic-ai/02-optimization.md\")"
+      "Bash(grep -n '\\\\$[^$]*>[^$]*\\\\$' \"/c/Users/sihyun/Desktop/foxyhyun.github.io/_lectures/basic-ai/02-optimization.md\")",
+      "Bash(grep -rln \"mathjax\\\\|MathJax\\\\|katex\\\\|KaTeX\\\\|tex-mml\\\\|\\\\\\\\\\\\\\\\\\(\" _includes/ _layouts/ _config.yml _posts/)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }

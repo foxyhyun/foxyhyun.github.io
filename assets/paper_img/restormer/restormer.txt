@@ -1,0 +1,44 @@
+알게된 내용들 : 
+- ill-posed : Image Prior, 이미지가 어떻게 생겼어야 하는지에 대한 사전 지식
+- local connectivity : 각 뉴런이 인접한 pixel들만 본다
+- translation equivariance : 위치에 무관하게 패턴 인식
+- Receptive Field 개념에서 이미지의 멀리 있는 내용도 같이 보려면 Layer를 깊게 쌓아야 함
+- Convolution Filter는 static weights at inference로 입력에 유연하지 않다
+- Self Attention은 전체 이미지의 모든 픽셀 쌍간 유사도를 구하므로, Receptive Field가 전체 이미지고 입력에 동적임
+- vanilla multi-head SA는 공간 차원이 아닌 K와 Q로 입력된 입력 feature channel간 cross covariance 계산함
+- local context mixing : 각 feature의 pixel을 계산할 때, 주변 픽셀들의 정보를 섞어 사용
+- pixel unshuffle : 정보 손실 없이 공간 해상도를 줄이되 채널 수를 늘림
+- pixel shuffle : max pooling, binary interpolation 대신 사용
+- 연산량 때문에 SA를 Image Restoration에 사용을 잘 안함
+- depth wise convolution : 각 픽셀의 feature에 주변 픽셀이 봄
+- bias free convolutional layers : bias 항이 있으면 다양한 noise level에 성능이 떨어짐. 입력의 절대값이 아닌, 상대적 패턴에 집중할 수 있음
+- GELU : 0에 가까우면 해당 위치의 F 억제, 1에 가까우면 통과
+- progressive learning : train, test의 이미지 해상도가 다른 문제 때문에 inference에서 성능이 떨어질 수 있음. 따라서 학습 때도 본 적 없는 size도 가능케 세팅하는 방법
+- curriculum learning : 쉬운거부터 어려운순으로 학습
+
+중요하다고 생각하는 문장들 : 
+- we propose an efficient Transformer model by making several key designs in the building blocks (multi-head attention and feed-forward network) such that it can capture
+long-range pixel interactions, while still remaining applicable to large images
+- Although SA is highly effective in capturing long-range pixel interactions, its complexity grows quadratically with the spatial
+resolution, therefore making it infeasible to apply to highresolution images 
+- In this paper, we propose an efficient Transformer for image restoration that is capable of modeling global connectivity and is still applicable to large images. Specifically, we introduce a multi-Dconv head ‘transposed’ attention (MDTA) block (Sec. 3.1) in place of vanilla multi-head SA [77], that has linear complexity. It applies SA across feature dimension rather than the spatial dimension, i.e., instead of explicitly modeling pairwise pixel interactions,
+MDTA computes cross-covariance across feature channels to obtain attention map from the (key and query projected)
+input features. An important feature of our MDTA block is the local context mixing before feature covariance computation. This is achieved via pixel-wise aggregation of crosschannel context using 1×1 convolution and channel-wise
+aggregation of local context using efficient depth-wise convolutions. This strategy provides two key advantages. First, it emphasizes on the spatially local context and brings in the
+complimentary strength of convolution operation within our pipeline. Second, it ensures that the contextualized global relationships between pixels are implicitly modeled while
+computing covariance-based attention maps
+- we reformulate the first linear transformation layer of the regular FN [77] with a gating mechanism [16] to improve the information flow through the network.
+- Given a degraded image I ∈ R H×W×3,
+Restormer first applies a convolution to obtain low-level feature embeddings F0 ∈ RH×W×C ; where H×W denotes
+the spatial dimension and C is the number of channels. Next, these shallow features F0 pass through a 4-level symmetric encoder-decoder and transformed into deep features
+Fd ∈ RH×W×2C . Each level of encoder-decoder contains multiple Transformer blocks, where the number of blocks are gradually increased from the top to bottom levels to maintain efficiency. 
+-  At level-1, we let Transformer blocks to aggregate the low-level image features of the encoder with the high-level features of the decoder
+- Finally, a convolution layer is applied to the refined features to generate residual
+image R ∈ RH×W×3 to which degraded image is added to obtain the restored image: ˆI = I + R. Next, we present the modules of the Transformer block
+- Therefore, it is infeasible to apply SA on most image restoration tasks that often involve high-resolution images
+- The key ingredient is to apply SA across channels rather than the spatial dimension, i.e., to compute cross-covariance across channels
+to generate an attention map encoding the global context implicitly. As another essential component in MDTA, we
+introduce depth-wise convolutions to emphasize on the local context before computing feature covariance to produce the global attention map.
+-  GDFN controls the information flow through the respective hierarchical levels in our pipeline, thereby allowing each level to focus on the fine details complimentary to the other levels. 
+- we perform progressive learning where the network is trained on smaller image patches in the early epochs and on gradually larger patches in the later training epochs.
+- We train separate models for different image restoration tasks. 

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LFM & PSF 배경 지식 — V2V3D</title>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  :root{
+    --bg:#0f1115; --card:#171a21; --ink:#e8eaed; --muted:#a8b0bb;
+    --accent:#7aa2ff; --accent2:#ffb86b; --line:#2a2f3a; --mark:#3a2a55;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.75; font-size:16.5px;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:48px 22px 120px;}
+  header.hero{
+    border:1px solid var(--line); border-radius:18px; padding:30px 28px;
+    background:linear-gradient(135deg,#1a1f2b 0%,#161a22 100%); margin-bottom:34px;
+  }
+  header.hero h1{margin:0 0 8px; font-size:27px; letter-spacing:-.4px;}
+  header.hero p{margin:0; color:var(--muted); font-size:15px;}
+  .toc{
+    border:1px solid var(--line); border-radius:14px; padding:18px 22px;
+    background:var(--card); margin-bottom:38px;
+  }
+  .toc b{display:block; color:var(--accent); margin-bottom:10px; font-size:14px; letter-spacing:.5px; text-transform:uppercase;}
+  .toc ol{margin:0; padding-left:20px;}
+  .toc a{color:var(--ink); text-decoration:none;}
+  .toc a:hover{color:var(--accent);}
+  section{
+    border:1px solid var(--line); border-radius:16px; padding:26px 28px;
+    background:var(--card); margin-bottom:26px;
+  }
+  section h2{
+    margin:0 0 6px; font-size:20px; color:var(--accent2);
+    display:flex; align-items:baseline; gap:10px;
+  }
+  section h2 .num{
+    font-size:13px; color:#6b7280; border:1px solid var(--line);
+    border-radius:8px; padding:2px 9px; flex:none;
+  }
+  section h3{font-size:16px; color:var(--accent); margin:22px 0 6px;}
+  p{margin:10px 0;}
+  .muted{color:var(--muted);}
+  mark{background:var(--mark); color:#e8d9ff; padding:1px 5px; border-radius:5px;}
+  ul{margin:10px 0; padding-left:22px;}
+  li{margin:5px 0;}
+  .eq{
+    overflow-x:auto; background:#10131a; border:1px solid var(--line);
+    border-radius:12px; padding:6px 16px; margin:16px 0;
+  }
+  .note{
+    border-left:3px solid var(--accent); background:#141925;
+    padding:12px 16px; border-radius:0 10px 10px 0; margin:16px 0; color:var(--muted); font-size:15px;
+  }
+  .vars{font-size:14.5px; color:var(--muted);}
+  .vars code{color:var(--accent2); background:#10131a; padding:1px 6px; border-radius:5px;}
+  footer{color:#5b6270; text-align:center; font-size:13px; margin-top:40px;}
+  .back{
+    display:inline-block; margin-bottom:26px; color:var(--accent);
+    text-decoration:none; font-size:14px; border:1px solid var(--line);
+    padding:8px 14px; border-radius:10px; background:var(--card);
+  }
+  .back:hover{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>📖 Light Field Microscopy & PSF 배경 지식</h1>
+    <p>V2V3D 리뷰를 읽기 전에 알아두면 좋은 광학(wave optics) 기반 LFM 결상 모델과 PSF 수식 정리</p>
+  </header>
+
+  <nav class="toc">
+    <b>목차</b>
+    <ol>
+      <li><a href="#s1">LFM이란? — 한 번의 촬영으로 3D를</a></li>
+      <li><a href="#s2">Light Field의 두 평면(2-plane) 표현과 view</a></li>
+      <li><a href="#s3">PSF: 점광원에 대한 시스템의 응답</a></li>
+      <li><a href="#s4">Wave-optics PSF 유도 (대물렌즈 → MLA → 센서)</a></li>
+      <li><a href="#s5">Forward model: 측정식 $\mathbf{I}=\mathbf{H}\mathbf{g}+\mathbf{n}$</a></li>
+      <li><a href="#s6">RLD 복원과 back-projection</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============ 1 ============ -->
+  <section id="s1">
+    <h2><span class="num">01</span> LFM이란? — 한 번의 촬영으로 3D를</h2>
+    <p>
+      일반 광학현미경은 초점이 맞는 한 장의 2D 평면만 기록한다. 3D 정보를 얻으려면 초점을 z축으로 바꿔가며
+      여러 장(z-stack)을 찍어야 하므로 <b>시간 해상도</b>가 희생된다. 살아있는 세포의 칼슘 신호, 신경 활동처럼
+      <b>빠르게 움직이는 생물학적 과정</b>에서는 이게 치명적이다.
+    </p>
+    <p>
+      <b>Light Field Microscopy(LFM)</b>는 대물렌즈의 상평면(native image plane)에
+      <b>마이크로렌즈 어레이(microlens array, MLA)</b>를 끼워 넣는다.
+      각 마이크로렌즈는 한 점에 모인 빛을 다시 각도별로 펼쳐 센서에 떨어뜨린다.
+      덕분에 센서는 <mark>공간(spatial) 정보와 각도(angular) 정보를 동시에</mark> 단 한 번의 노출로 기록한다.
+    </p>
+    <div class="note">
+      핵심: 각도 정보가 곧 깊이(depth) 단서다. 서로 다른 각도에서 본 장면(view)들을 모으면
+      <b>scanning 없이 volumetric data(3D)</b>를 복원할 수 있다 → 높은 깊이 해상도 + 높은 시간 해상도를 동시에.
+    </div>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section id="s2">
+    <h2><span class="num">02</span> Light Field의 두 평면 표현과 view</h2>
+    <p>
+      Light field는 공간을 지나는 모든 광선(ray)을 4차원 함수로 표현한다. 흔히 두 개의 평행한 평면을 지나는
+      광선으로 매개변수화한다 — 공간 위치 $(s,t)$ 와 각도(방향) $(u,v)$:
+    </p>
+    <div class="eq">$$ L(s,t,u,v) $$</div>
+    <p>
+      여기서 각도 좌표 $(u,v)$를 <b>하나로 고정</b>하면, 장면을 특정 방향에서 바라본 2D 영상이 하나 얻어진다.
+      이것이 <b>view</b>(혹은 sub-aperture image)다. LFM 센서 데이터(LFI, light field image)는 결국
+      <mark>서로 조금씩 다른 시점(view)들의 집합</mark>으로 분해된다.
+    </p>
+    <ul>
+      <li>중앙 view(center view): 정면에서 본 영상 — 일반 현미경 사진과 가장 비슷.</li>
+      <li>주변 view: 비스듬히 본 영상 — 시차(parallax)로 인해 깊이마다 위치가 다르게 보임.</li>
+    </ul>
+    <p class="muted">
+      V2V3D가 "view-to-view"라고 부르는 이유가 여기 있다. 입력도 view들의 부분집합, 타깃(supervision)도
+      다른 view들의 부분집합이다. 두 부분집합은 <b>같은 시점이 아니므로 픽셀이 정렬되지 않는다(pixel-unmatched)</b>.
+    </p>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section id="s3">
+    <h2><span class="num">03</span> PSF: 점광원에 대한 시스템의 응답</h2>
+    <p>
+      <b>PSF(Point Spread Function)</b>는 "이상적인 점광원 하나"가 이미징 시스템을 통과했을 때 센서에 어떻게
+      퍼져 맺히는지를 나타내는 함수다. 선형 시스템에서 임의의 물체는 무수히 많은 점광원의 합이므로,
+      관측 영상은 <b>물체와 PSF의 convolution</b>으로 모델링된다.
+    </p>
+    <p>
+      일반 현미경이라면 PSF는 평면 하나에 대해 정의되지만, LFM의 PSF는 MLA 때문에 훨씬 복잡하다.
+      점광원의 <b>3D 위치 $\mathbf{p}=(p_x,p_y,p_z)$</b> 에 따라 센서에 맺히는 패턴이 완전히 달라진다
+      (특히 깊이 $p_z$에 매우 민감). 즉 LFM의 PSF는 <mark>공간적으로 변하고(spatially-varying), 깊이 의존적</mark>이다.
+    </p>
+    <div class="eq">$$ I(\mathbf{x}) \;=\; \sum_{z} \big( h_z * o_z \big)(\mathbf{x}) \;+\; n(\mathbf{x}) $$</div>
+    <p class="vars">
+      <code>o_z</code> : 깊이 $z$에서의 물체 슬라이스 &nbsp;·&nbsp;
+      <code>h_z</code> : 깊이 $z$에 대응하는 depth-dependent PSF &nbsp;·&nbsp;
+      <code>*</code> : 2D convolution &nbsp;·&nbsp;
+      <code>n</code> : 센서 노이즈
+    </p>
+    <div class="note">
+      V2V3D가 "PSF priors"를 쓴다는 것은, 이 물리적 결상 모델(어떤 점이 어디로 어떻게 퍼지는가)을
+      네트워크 feature 정렬에 명시적으로 주입한다는 뜻이다.
+    </div>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section id="s4">
+    <h2><span class="num">04</span> Wave-optics PSF 유도</h2>
+    <p>
+      기하광학(ray)만으로는 회절(diffraction)을 설명할 수 없어 고해상도 영역에서 부정확하다. 그래서 LFM PSF는
+      <b>파동광학(wave optics)</b> / 스칼라 회절 이론으로 유도한다 (Broxton et al., 2013).
+    </p>
+
+    <h3>(1) 대물렌즈를 지난 native plane에서의 진폭</h3>
+    <p>
+      object 공간의 점광원 $\mathbf{p}$가 만드는, 상평면(native image plane) 위치 $\mathbf{x}=(x,y)$에서의 복소 진폭 $U$는
+      대물렌즈의 개구(pupil)를 적분한 형태로 주어진다:
+    </p>
+    <div class="eq">
+      $$ U(\mathbf{x};\mathbf{p}) \;\propto\;
+      \int_{0}^{\alpha} \sqrt{\cos\theta}\,\big(1+\cos\theta\big)\,
+      J_0\!\Big(\frac{k\,r\,\sin\theta}{\sin\alpha}\Big)\,
+      \exp\!\Big(\!-\frac{i\,u\,\sin^2(\theta/2)}{2\sin^2(\alpha/2)}\Big)\,
+      \sin\theta \; d\theta $$
+    </div>
+    <p class="vars">
+      <code>k = 2π/λ</code> : 파수(wavenumber) &nbsp;·&nbsp;
+      <code>α = arcsin(NA/n)</code> : 대물렌즈 반각 &nbsp;·&nbsp;
+      <code>J₀</code> : 0차 Bessel 함수 &nbsp;·&nbsp;
+      <code>r = √(x²+y²)</code> : 반경 방향 거리<br>
+      <code>v = k·r·sinα</code> : 반경 광학좌표 &nbsp;·&nbsp;
+      <code>u = 4k·p_z·sin²(α/2)</code> : 축방향(깊이) 광학좌표 → <b>깊이 $p_z$가 위상에 들어간다</b>
+    </p>
+
+    <h3>(2) 마이크로렌즈 어레이(MLA)의 위상 변조</h3>
+    <p>
+      native plane의 파면이 중심 $\mathbf{c}$인 마이크로렌즈(초점거리 $f_{\mathrm{ML}}$)를 지나면, 렌즈는 2차 위상항을 곱한다:
+    </p>
+    <div class="eq">
+      $$ \Phi_{\mathrm{ML}}(\mathbf{x}) \;=\; \exp\!\Big(\!-\frac{i\,k}{2 f_{\mathrm{ML}}}\,\lVert \mathbf{x}-\mathbf{c}\rVert^2\Big) $$
+    </div>
+
+    <h3>(3) 센서로의 Fresnel 전파</h3>
+    <p>
+      MLA를 지난 파면 $U\cdot\Phi_{\mathrm{ML}}$ 을 MLA–센서 거리 $d$만큼 <b>Fresnel 전파</b>시키고 세기(intensity)를 취하면
+      최종 LFM PSF가 된다:
+    </p>
+    <div class="eq">
+      $$ h(\mathbf{x}';\mathbf{p}) \;=\; \Big|\, \mathcal{F}_{d}\big\{\, U(\mathbf{x};\mathbf{p})\,\Phi_{\mathrm{ML}}(\mathbf{x}) \,\big\} \,\Big|^{2} $$
+    </div>
+    <p class="vars">
+      <code>𝓕_d</code> : 거리 $d$에 대한 Fresnel 전파 연산자 &nbsp;·&nbsp;
+      <code>x'</code> : 센서 평면 좌표 &nbsp;·&nbsp;
+      <code>|·|²</code> : 진폭 → 세기(검출되는 양)
+    </p>
+    <div class="note">
+      결과 $h(\mathbf{x}';\mathbf{p})$ 는 점광원의 3D 위치마다 다른 패턴을 갖는 <b>광학 시스템의 지문</b>이다.
+      V2V3D는 이 PSF를 변환(transformation)해 convolution kernel로 만들고, feature와 2D convolution 하여
+      서로 다른 view에서 뽑은 feature를 물리적으로 정렬(align)한다.
+    </div>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section id="s5">
+    <h2><span class="num">05</span> Forward model: 측정식</h2>
+    <p>
+      위 PSF로 볼륨 전체의 결상을 이산화하면, 측정된 LFI는 선형 연산으로 깔끔하게 쓰인다:
+    </p>
+    <div class="eq">$$ \mathbf{I} \;=\; \mathbf{H}\,\mathbf{g} \;+\; \mathbf{n} $$</div>
+    <p class="vars">
+      <code>g</code> : 복원하고 싶은 3D 볼륨(vectorized) &nbsp;·&nbsp;
+      <code>H</code> : LFM PSF로부터 만든 측정 행렬(measurement / forward operator) &nbsp;·&nbsp;
+      <code>I</code> : 센서가 측정한 LFI &nbsp;·&nbsp;
+      <code>n</code> : 노이즈
+    </p>
+    <p>
+      재구성(reconstruction)이란 결국 $\mathbf{I}$로부터 $\mathbf{g}$를 푸는 <b>역문제(inverse problem)</b>다.
+      그런데 $\mathbf{H}$는 매우 크고 ill-conditioned이며 노이즈까지 끼어 있어, 직접 역행렬을 구하는 것은 불가능에 가깝다.
+    </p>
+  </section>
+
+  <!-- ============ 6 ============ -->
+  <section id="s6">
+    <h2><span class="num">06</span> RLD 복원과 back-projection</h2>
+    <p>
+      고전적 해법은 <b>Richardson–Lucy Deconvolution(RLD)</b>로, 다음 곱셈형 갱신을 반복한다:
+    </p>
+    <div class="eq">
+      $$ \mathbf{g}^{(k+1)} \;=\; \mathbf{g}^{(k)} \;\odot\;
+      \mathbf{H}^{\!\top}\!\left[\, \frac{\mathbf{I}}{\mathbf{H}\,\mathbf{g}^{(k)}} \,\right] $$
+    </div>
+    <p class="vars">
+      <code>⊙</code> : element-wise 곱 &nbsp;·&nbsp;
+      <code>Hg⁽ᵏ⁾</code> : 현재 추정 볼륨의 forward projection &nbsp;·&nbsp;
+      <code>Hᵀ</code> : <b>back-projection</b>(2D 측정을 3D 공간으로 되돌림)
+    </p>
+    <p>
+      매 iteration마다 forward projection $\mathbf{H}\mathbf{g}$ 와 back-projection $\mathbf{H}^{\!\top}$ 을 모두 계산해야 하고,
+      수렴까지 수십~수백 번을 돌려야 한다. 그래서 RLD 계열은 <mark>계산량이 크고 느린 반복(iterative) 과정</mark>에 의존한다.
+      게다가 반복이 진행될수록 노이즈가 증폭되는 문제도 있다.
+    </p>
+    <div class="note">
+      <b>back-projection의 직관</b>: 하나의 view(2D)에서 본 밝기를, 그 view의 광선 방향을 따라 3D 볼륨으로 "되쏘아" 분배하는 것.
+      여러 view의 back-projection을 겹치면 실제 광원이 있던 3D 위치에서 신호가 보강된다. V2V3D는 raw 픽셀이 아니라
+      <b>encoder가 뽑은 feature map을 back-projection</b>하여 통일된 3D 공간에서 aggregate함으로써, 더 견고한 특징 융합을 얻는다.
+    </div>
+  </section>
+
+  <footer>
+    참고: Broxton et al., "Wave optics theory and 3-D deconvolution for the light field microscope," Optics Express, 2013.<br>
+    이 페이지는 V2V3D 리뷰의 부록입니다 — 탭을 닫으면 본문으로 돌아갑니다.
+  </footer>
+
+</div>
+</body>
+</html>
